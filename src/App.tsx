@@ -1,22 +1,15 @@
 import React from 'react';
 import './App.css';
+import TaskTracerSignUpComponent from './components/shared/singup/TaskTracerSignUpComponent';
+import FormContainer from './container/FormContainer';
+import TaskTracerLoginComponent from './components/shared/login/TaskTracerLoginComponent';
 
 function App() {
+  const WrappedSignUpComponent = FormContainer(TaskTracerLoginComponent);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <WrappedSignUpComponent />
     </div>
   );
 }
