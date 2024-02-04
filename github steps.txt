@@ -1,0 +1,6 @@
+git add .
+git commit -m
+git branch(master oluşmuş olmalı)
+git branch cengizdev
+git remote add origin 'repo url'
+git push -u origin cengizdev
