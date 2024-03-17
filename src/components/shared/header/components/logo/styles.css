@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    align-items: center;
+    margin-top: 1vh;
+}
+
+.logo {
+    width: auto; 
+    height: 5vh;
+    margin-right: 1vh;
+}
+
+.text {
+    font-weight: 350;
+    font-size: 3vh;
+}
