@@ -1,5 +1,13 @@
 .App {
   text-align: center;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
+
+.app-footer{
+  height: 100px;
+   background-color: #C9F299;
 }
 
 .App-logo {

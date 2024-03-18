@@ -1,7 +1,5 @@
 import { Grid } from '@mui/material'
-import TaskTracerFooterComponent from '../../components/shared/footer/TaskTracerFooterComponent'
-import TaskTracerHeaderComponent from '../../components/shared/header/TaskTracerHeaderComponent'
-import React from 'react'
+import TaskTracerDashboardContainer from '../../container/dashboard/TaskTracerDashboardContainer'
 
 const TaskTracerDashboard = () => {
   return (
@@ -9,9 +7,7 @@ const TaskTracerDashboard = () => {
       <div>
           <Grid container>
               <Grid item xs={12}>
-                <TaskTracerHeaderComponent/>
-                CONTENT
-                <TaskTracerFooterComponent/>
+                <TaskTracerDashboardContainer/>
               </Grid>
           </Grid>
       </div>
