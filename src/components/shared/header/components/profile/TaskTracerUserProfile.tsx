@@ -5,7 +5,7 @@ interface TaskTracerProfileProps {
 }
 
 
-const TaskTracerProfile:React.FC<TaskTracerProfileProps> = ({userName}) => {
+const TaskTracerUserProfile:React.FC<TaskTracerProfileProps> = ({userName}) => {
 
     const names = userName.split(' ');
 
@@ -13,10 +13,10 @@ const TaskTracerProfile:React.FC<TaskTracerProfileProps> = ({userName}) => {
 
     return(
     <>
-        <Avatar style={{width:'7vh', height:'6vh', marginTop:'1vh'}}>{initials}</Avatar>
+        <Avatar className='avatar'>{initials}</Avatar>
     </>
     )
 
 }
 
-export default TaskTracerProfile;
+export default TaskTracerUserProfile;

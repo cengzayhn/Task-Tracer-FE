@@ -1,7 +1,11 @@
 .container {
     display: flex;
     align-items: center;
-    margin-top: 1vh;
+    margin-top: 3vh;
+}
+
+.logo_container{
+    position: absolute;
 }
 
 .logo {
@@ -13,4 +17,5 @@
 .text {
     font-weight: 350;
     font-size: 3vh;
+    
 }

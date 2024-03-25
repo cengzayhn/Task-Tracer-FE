@@ -1,5 +1,3 @@
-import React from 'react';
-import './styles.css';
 import { Grid } from '@mui/material';
 import {TaskTracerLogo} from './components/logo/TaskTracerLogo';
 import TaskTracerButton from './components/button/TaskTracerButton';
@@ -20,7 +18,7 @@ const TaskTracerHeaderComponent = () => {
                         <TaskTracerButton/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TaskTracerProfile userName='Mehmet Cengiz Ayhan'/>
+                        <TaskTracerProfile userName='Cengiz Ayhan'/>
                     </Grid>
                 </Grid>
             </Container>
