@@ -4,10 +4,18 @@
     text-transform: capitalize;
     border-radius: 8px; 
     padding: 10px 20px; 
-    margin: 5px; 
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px; 
     transition: all 0.3s ease;
 }
 
 .task-tracer-button:hover {
     background-color: #f0f0f0;
+}
+
+.logo{
+    width: auto;
+    height: 35px;
+    margin-top: -6px;
 }

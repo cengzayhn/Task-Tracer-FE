@@ -11,10 +11,7 @@ const TaskTracerHeaderComponent = () => {
         <div>
             <Container maxWidth="lg" style={{borderBottom:'2px solid green'}}>
                 <Grid container>
-                    <Grid item xs={2}>
-                        <TaskTracerLogo/>
-                    </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={11}>
                         <TaskTracerButton/>
                     </Grid>
                     <Grid item xs={1}>
