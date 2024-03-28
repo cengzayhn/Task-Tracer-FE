@@ -1,15 +1,24 @@
-import React from 'react';
 import './App.css';
-import TaskTracerSignUpComponent from './components/shared/singup/TaskTracerSignUpComponent';
-import FormContainer from './container/FormContainer';
-import TaskTracerLoginComponent from './components/shared/login/TaskTracerLoginComponent';
+import TaskTracerHeaderComponent from './components/shared/header/TaskTracerHeaderComponent';
+import TaskTracerFooterComponent from './components/shared/footer/TaskTracerFooterComponent';
+import TaskTracerNotFoundPage from './pages/notFound/TaskTracerNotFoundPage';
+import TaskTracerDashboardContainer from './container/dashboard/TaskTracerDashboardContainer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const WrappedSignUpComponent = FormContainer(TaskTracerLoginComponent);
-
   return (
     <div className="App">
-      <WrappedSignUpComponent />
+         <Router>
+        <TaskTracerHeaderComponent />
+        <Routes>
+          <Route path="/" element={<TaskTracerDashboardContainer />} />
+          <Route path="/projects" element={<>projects</>} />
+          <Route path="/teams" element={<>teams</>} />
+          <Route path="/calendar" element={<>calendar</>} />
+          <Route path="*" element={<TaskTracerNotFoundPage />} />
+        </Routes>
+        <TaskTracerFooterComponent />
+      </Router>
     </div>
   );
 }
