@@ -8,7 +8,7 @@ const TaskTracerFooterComponent = () => {
     return(
     <>
         <div>
-            <Container maxWidth="lg" style={{borderTop:'2px solid green'}}>
+            <Container maxWidth="lg" className="footer-container">
                 <Grid container className='footer-content'>
                     &copy; 2023 - TaskTracer
                 </Grid>
