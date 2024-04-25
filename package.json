@@ -8,6 +8,7 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
+    "@mui/styles": "^5.15.14",
     "@mui/system": "^5.15.6",
     "@mui/types": "^7.2.13",
     "@reduxjs/toolkit": "^2.0.1",

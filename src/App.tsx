@@ -4,17 +4,18 @@ import TaskTracerFooterComponent from './components/shared/footer/TaskTracerFoot
 import TaskTracerNotFoundPage from './pages/notFound/TaskTracerNotFoundPage';
 import TaskTracerDashboardContainer from './container/dashboard/TaskTracerDashboardContainer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TaskTracerProjectsPage from './pages/projects/TaskTracerProjectsPage';
 
 function App() {
+  const defaultDate = new Date('2024-03-01')
   return (
     <div className="App">
          <Router>
         <TaskTracerHeaderComponent />
         <Routes>
-          <Route path="/" element={<TaskTracerDashboardContainer />} />
-          <Route path="/projects" element={<>projects</>} />
+          <Route path="/" element={<TaskTracerDashboardContainer/>} />
+          <Route path="/projects" element={<TaskTracerProjectsPage/>} />
           <Route path="/teams" element={<>teams</>} />
-          <Route path="/calendar" element={<>calendar</>} />
           <Route path="*" element={<TaskTracerNotFoundPage />} />
         </Routes>
         <TaskTracerFooterComponent />
