@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles.css';
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
