@@ -20,8 +20,8 @@ const TaskTracerButton = () => {
                 </Link>
             </Grid>
             <Grid item xs={3}>
-                <Link to="/teams">
-                    <Button variant='text' color='success' className='task-tracer-button'>Teams</Button>
+                <Link to="/chat">
+                    <Button variant='text' color='success' className='task-tracer-button'>Chat</Button>
                 </Link>
             </Grid>  
             <Grid item xs={3}>

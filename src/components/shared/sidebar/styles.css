@@ -1,0 +1,29 @@
+.sidebarContent {
+    padding: 16px;
+    color: #C8D5D5;
+    background-color: #255957;
+    height: 97%;
+}
+.sidebarTitle{
+    color: #C8D5D5;
+    margin-bottom: "30px",
+}
+.sidebar-menu{
+}
+
+.listItem {
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.listItem:hover {
+    background-color: #f0f0f0;
+}
+
+.listItemText {
+    font-weight: 600;
+}
+
+.nestedList {
+    padding-left: 50px;
+}
