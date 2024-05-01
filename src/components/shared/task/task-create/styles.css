@@ -19,9 +19,9 @@
 .MuiDialogActions-root {
   display: flex;
   justify-content: space-between;
-  margin-top: 16px; /* Aralığı kontrol etmek için */
+  margin-top: 16px; 
 }
 
 .MuiButton-root {
-  margin-left: 8px; /* Butonlar arası boşluk için */
+  margin-left: 8px;
 }
