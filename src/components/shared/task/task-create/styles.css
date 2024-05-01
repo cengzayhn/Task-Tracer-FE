@@ -1,0 +1,27 @@
+.MuiDialog-paper {
+  border-radius: 15px !important;
+}
+
+.MuiDialogTitle-root {
+  background-color: #255957 !important;
+  color: white !important;
+}
+
+.MuiDialogContentText-root {
+  padding-top: 24px !important;
+}
+
+.MuiTextField-root {
+  width: 100% !important;
+  margin-bottom: 24px !important;
+}
+
+.MuiDialogActions-root {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px; 
+}
+
+.MuiButton-root {
+  margin-left: 8px;
+}
