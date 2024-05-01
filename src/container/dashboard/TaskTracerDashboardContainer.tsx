@@ -8,6 +8,7 @@ const TaskTracerDashboardContainer = () => {
       <div>
           <Grid container>
               <Grid item xs={12}>
+                DASHBOARD
               </Grid>
           </Grid>
       </div>

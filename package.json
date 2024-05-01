@@ -8,6 +8,8 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
+    "@mui/x-date-pickers": "^5.0.20",
+    "date-fns": "^2.29.1",
     "@mui/styles": "^5.15.14",
     "@mui/system": "^5.15.6",
     "@mui/types": "^7.2.13",

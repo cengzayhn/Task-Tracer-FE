@@ -6,6 +6,8 @@ import TaskTracerDashboardContainer from './container/dashboard/TaskTracerDashbo
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TaskTracerProjectsPage from './pages/projects/TaskTracerProjectsPage';
 import TaskTracerChatPage from './pages/chat/TaskTracerChatPage';
+import TaskTracerCalendarPage from './pages/calendar/TaskTracerCalendarPage';
+
 
 function App() {
   const defaultDate = new Date('2024-03-01')
@@ -17,6 +19,7 @@ function App() {
           <Route path="/" element={<TaskTracerDashboardContainer/>} />
           <Route path="/projects" element={<TaskTracerProjectsPage/>} />
           <Route path="/chat" element={<TaskTracerChatPage/>} />
+          <Route path='/calendar' element={<TaskTracerCalendarPage/>}/>
           <Route path="*" element={<TaskTracerNotFoundPage />} />
         </Routes>
         <TaskTracerFooterComponent />
