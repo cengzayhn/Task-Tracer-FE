@@ -5,7 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import TaskCard from '../task/TaskCard';
 import './styles.css';
-import TaskCreateDialog from '../task/task-create/TaskCreateDialog';
+import TaskTracerDialog from '../task/dialog/TaskTracerDialog';
 
 const dummyData = [
   { title: 'Task 1', description: 'Bu bir task açıklamasıdır 1.' },
@@ -21,8 +21,9 @@ const dummyData = [
 const TaskTracerCalendarComponent: React.FC = () => {
   const [selectedDate, setSelectedDate] = React.useState<Dayjs | null>(dayjs());
   const [openDialog, setOpenDialog] = React.useState<boolean>(false);
-  const [taskTitle , setTaskTitle] = React.useState<string>();
-  const [taskDescription, setTaskDescription] = React.useState<string>();
+  const [isEditMode, setIsEditMode] = React.useState<boolean>(false);
+  const [taskTitle , setTaskTitle] = React.useState<string>("");
+  const [taskDescription, setTaskDescription] = React.useState<string>("");
 
   return (
     <Box border={1} width="100%" p={2} className=""  style={{ height: "80vh", border:'1px solid transparent' }}>
@@ -43,14 +44,23 @@ const TaskTracerCalendarComponent: React.FC = () => {
         <Grid item xs={7} container spacing={2}  style={{ marginTop: '5vh', height: '100%', overflowY: 'auto'}}>
           <Grid item xs={12} sm={12}  style={{ width: '100%' , marginRight:'29vh'}}>
             <Typography variant="h5" gutterBottom style={{ marginBottom: '10px' }}>{selectedDate?.format("DD / MM / YYYY")}</Typography>
-            <Button variant='contained' color='success' onClick={()=>setOpenDialog(true)}  style={{width:'80%'}}>+</Button>  
+            <Button variant='contained' color='success' onClick={()=>{setOpenDialog(true); setIsEditMode(false)}} style={{width:'80%'}}>+</Button>  
           </Grid>  
           {dummyData.map((data, index) => (
             <Grid item xs={12} sm={12} key={index} style={{ width: '100%' , marginLeft:'10vh'}}>
-              <TaskCard title={data.title} description={data.description} />
+              <TaskCard title={data.title} description={data.description} setOpenDialog={setOpenDialog} setIsEditMode={setIsEditMode}/>
             </Grid>
           ))}
-          {selectedDate && (<TaskCreateDialog openDialog={openDialog} setOpenDialog={setOpenDialog} setTaskTitle={setTaskTitle} setTaskDescription={setTaskDescription}/>)}
+          {selectedDate && 
+          (<TaskTracerDialog
+           openDialog={openDialog}
+           setOpenDialog={setOpenDialog}
+           isEditMode= {isEditMode}
+           taskTitle={taskTitle}
+           taskDescription={taskDescription}
+           setTaskTitle={setTaskTitle} 
+           setTaskDescription={setTaskDescription}
+           />)}
         </Grid>
       </Grid>
     </Box>

@@ -1,0 +1,11 @@
+.column-container {
+    background-color: #255957;
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    color: white;
+}
+
+.column-content {
+    margin-left: 1vw;
+}

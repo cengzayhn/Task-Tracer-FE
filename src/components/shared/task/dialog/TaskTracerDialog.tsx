@@ -8,20 +8,23 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Grid, TextField } from '@mui/material';
 import './styles.css';
 
-interface TaskCreateDialogProps {
+interface TaskTracerDialogProps {
     openDialog: boolean;
-    setOpenDialog: Function;
-    setTaskTitle: Function;
-    setTaskDescription: Function;
+    setOpenDialog?: Function;
+    isEditMode?: boolean
+    taskTitle: string;
+    setTaskTitle?: Function;
+    taskDescription: string;
+    setTaskDescription?: Function;
 }
 
-const TaskCreateDialog: React.FC<TaskCreateDialogProps> = (props) => {
+const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
 
-    const {openDialog, setOpenDialog, setTaskTitle, setTaskDescription} = props;
+    const {openDialog, setOpenDialog, isEditMode, setTaskTitle, taskTitle, taskDescription, setTaskDescription} = props;
 
 
     const handleClose =() =>{
-        setOpenDialog(false);
+        setOpenDialog && setOpenDialog(false);
     }
 
     return(
@@ -33,23 +36,23 @@ const TaskCreateDialog: React.FC<TaskCreateDialogProps> = (props) => {
             aria-describedby="alert-dialog-description"
         >
             <DialogTitle id="alert-dialog-title">
-            {"Create a new Task"}
+            {isEditMode ? "Update the Task" : "Create a new Task"}
             </DialogTitle>
             <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-                <Grid container>
-                    <Grid item xs={12}>
-                        <TextField
-                            placeholder='Title'
-                        />
+                <DialogContentText id="alert-dialog-description">
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <TextField
+                                placeholder={taskTitle}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                placeholder={taskDescription}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            placeholder='Description'
-                        />
-                    </Grid>
-                </Grid>
-            </DialogContentText>
+                </DialogContentText>
             </DialogContent>
             <DialogActions>
             <Button variant='contained' color='success' onClick={handleClose}>Save</Button>
@@ -61,4 +64,4 @@ const TaskCreateDialog: React.FC<TaskCreateDialogProps> = (props) => {
 }
 
 
-export default TaskCreateDialog;    
+export default TaskTracerDialog;    

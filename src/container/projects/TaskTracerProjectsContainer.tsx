@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.css';
-import { Grid } from '@mui/material'
+import { Grid } from '@mui/material';
 import TaskTracerProjectsCard from '../../components/shared/projects-card/TaskTracerProjectsCard';
 import { Link } from 'react-router-dom';
 
