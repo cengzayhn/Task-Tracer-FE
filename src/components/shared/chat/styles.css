@@ -5,9 +5,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: -20px;
 }
 .chat-container{
     height: 90%;
+    margin-left: 20px;
 }
 .chat-textfield{
     width: 70%;

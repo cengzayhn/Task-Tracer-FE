@@ -1,15 +1,31 @@
 import React from "react";
 import './styles.css';
-import { Grid } from '@mui/material'
+import { Avatar, Grid } from '@mui/material'
 import TaskTracerSidebarComponent from "../../components/shared/sidebar/TaskTracerSidebarComponent";
 import TaskTracerChatComponent from "../../components/shared/chat/TaskTracerChatComponent";
 
+interface TaskTracerChatContainerProps{
+    userData: {
+        username: string;
+        connected: boolean;
+        password: string;
+        message: string;
+    };
+    setUserData: Function;
+}
 
-const TaskTracerChatContainer = () => {
-    const sidebarItems = [
-        { content: "Item 1", value: ["Value 1","Value 1","Value 1"] },
-        { content: "Item 2", value: ["Value 2","Value 2"] },
-        { content: "Item 3", value: ["Value 3","Value 3","Value 3","Value 3","Value 3"] }
+const TaskTracerChatContainer:React.FC<TaskTracerChatContainerProps> = ({userData, setUserData}) => {
+    const sidebarItem = [
+        { content: "Members", value: [
+            <div>
+                <Avatar></Avatar>
+                Member 1
+            </div>,
+            <div>
+            <Avatar></Avatar>
+            Member 2
+        </div>,
+        ] },
     ];
 
     return(
@@ -17,12 +33,12 @@ const TaskTracerChatContainer = () => {
         <Grid container>
             <Grid item xs={2}>
                 <div className='sidebar-container'>
-                    <TaskTracerSidebarComponent title="Projects" items={sidebarItems}/>
+                    <TaskTracerSidebarComponent title="Chatroom" items={sidebarItem}/>
                 </div>
             </Grid>
             <Grid item xs={10}>
                 <div className='chat-container'>
-                    <TaskTracerChatComponent/>
+                    <TaskTracerChatComponent userData={userData} setUserData={setUserData}/>
                 </div>  
             </Grid>
         </Grid>

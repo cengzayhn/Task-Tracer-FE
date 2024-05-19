@@ -1,54 +1,83 @@
-.input-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-    margin-top: 5vh;
-    border-radius: 10px;
-    background: #8FA998;
-  }
-  .input-form {
-    position: absolute;
-    top: 25%;
-    height: 70vh;
-  }
-  .input-label{
-    color: white;
-    text-align: left;
-  }
-  .input-text{
-    text-align: center;
-    margin-bottom: 3vh;
-    margin-top: 4vh;
-  }
-  .input-textfield{
-    width: 40vh;
-    border-color: #255957;
-    border-width: 20px;
-  }
-  .input-login{
-    color:#BADF99;
-    &:hover{
-      color:#255957;
-      cursor: pointer;
-      transition: 0.5s;
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #8FA998, #255957);
+}
+
+.form-container {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tasktracer-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+}
+
+.tasktracer-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.form-title {
+  margin-bottom: 2rem;
+  color: #255957;
+}
+
+.input-textfield {
+  margin-bottom: 1rem;
+  .MuiOutlinedInput-root {
+    & fieldset {
+      border-color: #255957;
+    }
+    &:hover fieldset {
+      border-color: #255957;
+    }
+    &.Mui-focused fieldset {
+      border-color: #255957;
     }
   }
-  .logo-container{
-    display: flex;
-    
-  }
-  .tasktracer-logo{
-    width: 8vh;
-    height: 8vh;
-    display: inherit;
-    margin-left: 25vh;
-    margin-right: 2vh;
-    margin-top: 2vh;
-  }
-  .tasktracer-name{
-    margin-top: 4vh;
-    font-size: larger;
-    font-weight: bold;
-  }
-  
+}
+
+.input-text {
+  margin: 1rem 0;
+}
+
+.input-login {
+  color: #255957;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.input-login:hover {
+  color: #8FA998;
+}
+
+.login-button {
+  background-color: #255957;
+  color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #8FA998;
+}

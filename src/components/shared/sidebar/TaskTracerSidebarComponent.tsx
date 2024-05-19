@@ -4,7 +4,7 @@ import './styles.css';
 
 interface TaskTracerSidebarComponentProps {
     title: string;
-    items: { content: string; value: string[] }[];
+    items: { content: string; value: React.ReactNode[] }[];
 }
 
 const TaskTracerSidebarComponent: React.FC<TaskTracerSidebarComponentProps> = (props) => {
