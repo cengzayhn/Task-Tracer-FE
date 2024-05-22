@@ -35,7 +35,7 @@ const TaskTracerCalendarComponent: React.FC = () => {
               displayStaticWrapperAs="desktop"
               openTo="year"
               value={selectedDate}
-              onChange={(newValue) => {
+              onChange={(newValue:any) => {
                 setSelectedDate(newValue);
               }}
           />
