@@ -5,22 +5,18 @@ import './styles.css';
 
 interface TaskTracerLoginComponentProps {
   setIsLoggedIn: Function;
-  userData: {
-    username: string;
-    connected: boolean;
-    password: string;
-  };
-  setUserData: Function;
   setShowLogin: Function;
 }
 
 const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props) => {
-  const { setIsLoggedIn, userData, setUserData, setShowLogin } = props;
+
+  const [username, setUsername] = React.useState<string>("")
+
+  const { setIsLoggedIn,setShowLogin } = props;
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (userData.username && userData.password) {
-      console.log(userData);
+    if (true) {
       navigate('/');
       setIsLoggedIn(true);
     } else {
@@ -45,8 +41,7 @@ const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props
               variant="outlined"
               fullWidth
               margin="normal"
-              value={userData.username}
-              onChange={(e) => setUserData((prevData: any) => ({ ...prevData, username: e.target.value }))}
+              value={username}
               className="input-textfield"
             />
             <TextField
@@ -55,8 +50,7 @@ const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props
               variant="outlined"
               fullWidth
               margin="normal"
-              value={userData.password}
-              onChange={(e) => setUserData((prevData: any) => ({ ...prevData, password: e.target.value }))}
+              value={username}
               className="input-textfield"
             />
             <Typography className="input-text">

@@ -1,115 +1,85 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, TextField } from '@mui/material';
-import './styles.css';
-import MessageCard from './components/MessageCard';
-import {
-  connect,
-  disconnect,
-  sendValue,
-  sendPrivateValue,
-  subscribeToTopics,
-  userJoin,
-} from '../../../service/chatService';
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
 
-interface ChatMessage {
-  senderName: string;
-  message: string;
-  status: string;
-  receiverName?: string;
+interface ChatPageProps {
+  username: string;
 }
 
-interface TaskTracerChatComponentProps {
-  userData: {
-    username: string;
-    connected: boolean;
-    password: string;
-    message: string;
-  };
-  setUserData: Function;
-}
-
-const TaskTracerChatComponent: React.FC<TaskTracerChatComponentProps> = ({ userData, setUserData }) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [privateChats, setPrivateChats] = useState<Map<string, ChatMessage[]>>(new Map());
-  
-  const [tab, setTab] = useState<string>("CHATROOM");
+const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
+  const [messages, setMessages] = useState<string[]>([]);
+  const [message, setMessage] = useState('');
+  const [stompClient, setStompClient] = useState<any>(null);
 
   useEffect(() => {
-    if (userData.username && userData.password && !userData.connected) {
-      connect(userData, setUserData, subscribeToTopics, userJoin, privateChats, setPrivateChats, setMessages);
-      setUserData((prevData: any) => ({ ...prevData, connected: true }));
-      return () => disconnect();
-    }
-  }, [userData.username, userData.password]);
+    const socket = new SockJS('http://localhost:8081/ws');
+    const client = Stomp.over(socket);
 
-  const handleMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setUserData((prevData: any) => ({ ...prevData, message: value }));
+    client.connect({}, () => {
+      client.subscribe('/topic/public', (msg: any) => {
+        const newMessage = JSON.parse(msg.body);
+        setMessages((prevMessages) => [...prevMessages, newMessage.content]);
+      });
+
+      client.send('/app/chat.addUser', {}, JSON.stringify({ sender: username, type: 'JOIN' }));
+    });
+
+    setStompClient(client);
+
+    return () => {
+      if (client && client.connected) {
+        client.disconnect(() => {
+          console.log('>>> DISCONNECT');
+        });
+      }
+    };
+  }, [username]);
+
+  const sendMessage = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (message && stompClient && stompClient.connected) {
+      const chatMessage = {
+        sender: username,
+        content: message,
+        type: 'CHAT'
+      };
+      stompClient.send('/app/chat.sendMessage', {}, JSON.stringify(chatMessage));
+      setMessage('');
+    }
   };
 
   return (
-    <React.Fragment>
-      {userData.connected && (
-        <div className="chat-box">
-          <Grid container>
-            <div className='chat-header'>
-              <span className='chat-username'>{userData.username}</span>
-            </div>
-          </Grid>
-          <Grid container className='chat-container'>
-            <Grid item xs={12}>
-              <div className='chat-messages'>
-              {tab === "CHATROOM" ? (
-                  messages.map((chat, index) => (
-                    <div key={index} className='message'>
-                      <MessageCard
-                        type={chat.senderName === userData.username ? 'outgoing' : 'incoming'}
-                        message={chat.message}
-                        username={chat.senderName}
-                      />
-                    </div>
-                  ))
-                ) : (
-                  privateChats.get(tab)?.map((chat, index) => (
-                    <div key={index} className='message'>
-                      <MessageCard
-                        type={chat.senderName === userData.username ? 'outgoing' : 'incoming'}
-                        message={chat.message}
-                        username={chat.senderName}
-                      />
-                    </div>
-                  ))
-                )}
-              </div>
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item xs={10}>
-              <TextField
-                variant='outlined'
-                autoFocus
-                size='medium'
-                onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
-                  if (e.key === 'Enter' && (e.target as HTMLInputElement).value.trim() !== '') {
-                    e.preventDefault();
-                    if (tab === "CHATROOM") {
-                      sendValue(userData.username, userData.message, setUserData);
-                    } else {
-                      sendPrivateValue(userData.username, tab, userData.message, setUserData, privateChats, setPrivateChats);
-                    }
-                    setUserData((prevData: any) => ({ ...prevData, message: '' })); 
-                  }
-                }}
-                placeholder='Type a message ...'
-                className='chat-textfield'
-                value={userData.message}
-                onChange={handleMessage}
-              />
-            </Grid>
-          </Grid>
+    <div id="chat-page">
+      <div className="chat-container">
+        <div className="chat-header">
+          <h2>Spring WebSocket Chat Demo - TaskTracer</h2>
         </div>
-      )}
-    </React.Fragment>
+        <div className="connecting">
+          Connecting...
+        </div>
+        <ul id="messageArea">
+          {messages.map((msg, index) => (
+            <li key={index}>{msg}</li>
+          ))}
+        </ul>
+        <form id="messageForm" name="messageForm" onSubmit={sendMessage}>
+          <div className="form-group">
+            <div className="input-group clearfix">
+              <input
+                type="text"
+                id="message"
+                placeholder="Type a message..."
+                autoComplete="off"
+                className="form-control"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+              <button type="submit" className="primary">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 
