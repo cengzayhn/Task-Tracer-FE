@@ -6,19 +6,20 @@ import './styles.css';
 interface TaskTracerLoginComponentProps {
   setIsLoggedIn: Function;
   setShowLogin: Function;
+  username: string;
+  setUsername: Function;
 }
 
 const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props) => {
 
-  const [username, setUsername] = React.useState<string>("")
+  const {setIsLoggedIn, setShowLogin, username, setUsername} = props;
 
-  const { setIsLoggedIn,setShowLogin } = props;
   const navigate = useNavigate();
 
   const handleLogin = () => {
     if (true) {
       navigate('/');
-      setIsLoggedIn(true);
+      props.setIsLoggedIn(true);
     } else {
       console.log("Invalid password or username");
     }
@@ -42,6 +43,7 @@ const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props
               fullWidth
               margin="normal"
               value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="input-textfield"
             />
             <TextField

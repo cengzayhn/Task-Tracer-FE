@@ -14,7 +14,7 @@ import TaskTracerLoginPage from './pages/login/TaskTracerLoginPage';
 
 function App() {
   
-
+  const [username, setUsername] = useState<string>('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
@@ -22,11 +22,11 @@ function App() {
       <Router>
         {isLoggedIn && <TaskTracerHeaderComponent />}
         <Routes>
-          <Route path="/login" element={<TaskTracerLoginPage setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route path="/login" element={<TaskTracerLoginPage setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername}/>} />
           <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
             <Route path="/" element={<TaskTracerDashboardPage />} />
             <Route path="/projects" element={<TaskTracerProjectsPage />} />
-            <Route path="/chat" element={<TaskTracerChatPage/>} />
+            <Route path="/chat" element={<TaskTracerChatPage username={username}/>} />
             <Route path="/calendar" element={<TaskTracerCalendarPage />} />
           </Route>
           <Route path="*" element={<TaskTracerNotFoundPage />} /> 

@@ -3,13 +3,17 @@ import TaskTracerChatContainer from "../../container/chat/TaskTracerChatContaine
 import { Grid } from '@mui/material'
 
 
-const TaskTracerChatPage = () => {
+interface TaskTracerChatPageProps {
+    username:string;
+} 
+
+const TaskTracerChatPage:React.FC<TaskTracerChatPageProps> = ({username}) => {
     return(
     <React.Fragment>
         <Grid container>
             <Grid item xs={1}/>
             <Grid item xs={10}>
-                <TaskTracerChatContainer/>
+                <TaskTracerChatContainer username={username}/>
             </Grid>
             <Grid item xs={1}/>
         </Grid>

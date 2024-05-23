@@ -4,8 +4,11 @@ import { Avatar, Grid } from '@mui/material'
 import TaskTracerSidebarComponent from "../../components/shared/sidebar/TaskTracerSidebarComponent";
 import TaskTracerChatComponent from "../../components/shared/chat/TaskTracerChatComponent";
 
+interface TaskTracerChatContainerProps{
+    username: string;
+}
 
-const TaskTracerChatContainer = () => {
+const TaskTracerChatContainer:React.FC<TaskTracerChatContainerProps> = ({username}) => {
     const sidebarItem = [
         { content: "Members", value: [
             <div>
@@ -29,7 +32,7 @@ const TaskTracerChatContainer = () => {
             </Grid>
             <Grid item xs={10}>
                 <div className='chat-container'>
-                    <TaskTracerChatComponent username="cengiz"/>
+                    <TaskTracerChatComponent username={username}/>
                 </div>  
             </Grid>
         </Grid>

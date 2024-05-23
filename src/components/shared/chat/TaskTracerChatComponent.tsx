@@ -6,8 +6,13 @@ interface ChatPageProps {
   username: string;
 }
 
+interface Message {
+  sender: string;
+  content: string;
+}
+
 const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState('');
   const [stompClient, setStompClient] = useState<any>(null);
 
@@ -16,9 +21,12 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
     const client = Stomp.over(socket);
 
     client.connect({}, () => {
+      console.log('Connected to WebSocket');
       client.subscribe('/topic/public', (msg: any) => {
+        console.log('Received message:', msg);
         const newMessage = JSON.parse(msg.body);
-        setMessages((prevMessages) => [...prevMessages, newMessage.content]);
+        console.log('Parsed message:', newMessage);
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
       });
 
       client.send('/app/chat.addUser', {}, JSON.stringify({ sender: username, type: 'JOIN' }));
@@ -59,7 +67,9 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
         </div>
         <ul id="messageArea">
           {messages.map((msg, index) => (
-            <li key={index}>{msg}</li>
+            <li key={index}>
+              <strong>{msg.sender}: </strong>{msg.content}
+            </li>
           ))}
         </ul>
         <form id="messageForm" name="messageForm" onSubmit={sendMessage}>
