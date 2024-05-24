@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Grid, TextField } from '@mui/material';
-import { createTask } from '../../../../service/taskService';
+import { createTask, updateTask } from '../../../../service/taskService';
 import './styles.css';
 
 interface TaskTracerDialogProps {
@@ -40,6 +40,7 @@ const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
             createTask(taskTitle, taskDescription, username, date);
         }else{
             console.log("duzenleyici mod")
+            updateTask("0636e5fa-855f-4310-9f33-d8956271a322",taskTitle, taskDescription, username, "DONE")
         }
         handleClose();
     }

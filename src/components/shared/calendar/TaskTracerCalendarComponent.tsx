@@ -8,14 +8,14 @@ import './styles.css';
 import TaskTracerDialog from '../task/dialog/TaskTracerDialog';
 
 const dummyData = [
-  { title: 'Task 1', description: 'Bu bir task açıklamasıdır 1.' },
-  { title: 'Task 2', description: 'Bu bir task açıklamasıdır 2.' },
-  { title: 'Task 3', description: 'Bu bir task açıklamasıdır 3.' },
-  { title: 'Task 4', description: 'Bu bir task açıklamasıdır 4.' },
-  { title: 'Task 5', description: 'Bu bir task açıklamasıdır 5.' },
-  { title: 'Task 6', description: 'Bu bir task açıklamasıdır 6.' },
-  { title: 'Task 7', description: 'Bu bir task açıklamasıdır 7.' },
-  { title: 'Task 8', description: 'Bu bir task açıklamasıdır 8.' },
+  { id:'',title: 'Task 1', description: 'Bu bir task açıklamasıdır 1.' },
+  { id:'',title: 'Task 2', description: 'Bu bir task açıklamasıdır 2.' },
+  { id:'',title: 'Task 3', description: 'Bu bir task açıklamasıdır 3.' },
+  { id:'',title: 'Task 4', description: 'Bu bir task açıklamasıdır 4.' },
+  { id:'',title: 'Task 5', description: 'Bu bir task açıklamasıdır 5.' },
+  { id:'',title: 'Task 6', description: 'Bu bir task açıklamasıdır 6.' },
+  { id:'',title: 'Task 7', description: 'Bu bir task açıklamasıdır 7.' },
+  { id:'',title: 'Task 8', description: 'Bu bir task açıklamasıdır 8.' },
 ];
   
 interface TaskTracerCalendarComponentProps {
@@ -54,7 +54,7 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
           </Grid>  
           {dummyData.map((data, index) => (
             <Grid item xs={12} sm={12} key={index} style={{ width: '100%' , marginLeft:'10vh'}}>
-              <TaskCard title={data.title} description={data.description} setOpenDialog={setOpenDialog} setIsEditMode={setIsEditMode}/>
+              <TaskCard id={data.id} title={data.title} description={data.description} setOpenDialog={setOpenDialog} setIsEditMode={setIsEditMode}/>
             </Grid>
           ))}
           {selectedDate && 

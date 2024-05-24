@@ -19,3 +19,20 @@ export const createTask = async (title:string, description:string, createdBy:str
         throw error;
     }
 }
+
+export const updateTask = async (id:string ,title:string, description:string, createdBy:string, state:string) => {
+    const requestBody = {
+        id: id,
+        title: title,
+        description: description,
+        createdBy: createdBy,
+        state: state
+    }
+    try{
+        const response = await axios.put(baseURL+taskURL+'update', requestBody);
+        return response.data;
+    }catch(error){
+        console.error("Task update error :", error);
+        throw error;
+    }
+}

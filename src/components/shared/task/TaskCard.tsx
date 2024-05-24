@@ -3,6 +3,7 @@ import { Card, CardContent, Typography } from "@mui/material";
 import "./styles.css";
 
 interface TaskCardProps {
+    id: string;
     title: string;
     description: string;
     setOpenDialog: Function;
@@ -11,7 +12,7 @@ interface TaskCardProps {
 
 const TaskCard: React.FC<TaskCardProps> = (props) => {
 
-    const { title, description, setOpenDialog, setIsEditMode } = props;
+    const { id, title, description, setOpenDialog, setIsEditMode } = props;
 
     const handleClick =()=>{
         setOpenDialog(true);
