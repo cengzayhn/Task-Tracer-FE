@@ -67,7 +67,8 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
   };
 
   return (
-    <div id="chat-page">
+    <React.Fragment>
+      <div id="chat-page">
       <div className="chat-container">
         <div className="chat-header">
           <h2>Spring WebSocket Chat Demo - TaskTracer</h2>
@@ -86,24 +87,25 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
             </li>
           ))}
         </ul>
-        <form id="messageForm" name="messageForm" onSubmit={sendMessage}>
-          <div className="form-group">
-            <div className="input-group clearfix">
-              <input
-                type="text"
-                id="message"
-                placeholder="Type a message..."
-                autoComplete="off"
-                className="form-control"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              />
-              <button type="submit" className="primary">Send</button>
-            </div>
-          </div>
-        </form>
       </div>
     </div>
+    <form id="messageForm" name="messageForm" onSubmit={sendMessage}>
+    <div className="form-group">
+        <div className="input-group clearfix">
+          <input
+            type="text"
+            id="message"
+            placeholder="Type a message..."
+            autoComplete="off"
+            className="chat-textfield"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <button type="submit" className="chat-send-button">Send</button>
+        </div>
+      </div>
+    </form>
+    </React.Fragment>
   );
 };
 
