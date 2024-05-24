@@ -71,10 +71,7 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
       <div id="chat-page">
       <div className="chat-container">
         <div className="chat-header">
-          <h2>Spring WebSocket Chat Demo - TaskTracer</h2>
-        </div>
-        <div className="connecting">
-          Connecting...
+          <h2>General Chat Channel </h2>
         </div>
         <ul id="messageArea">
           {Array.from(messagesMap.values()).map((msg, index) => (
