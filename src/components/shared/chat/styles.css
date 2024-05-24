@@ -40,3 +40,6 @@
 .message {
     
 }
+#messageArea {
+    list-style-type: none;
+  }
