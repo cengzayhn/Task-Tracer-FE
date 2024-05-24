@@ -12,7 +12,7 @@ interface Message {
 }
 
 const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messagesMap, setMessagesMap] = useState<Map<string, Message>>(new Map());
   const [message, setMessage] = useState('');
   const [stompClient, setStompClient] = useState<any>(null);
 
@@ -26,7 +26,15 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
         console.log('Received message:', msg);
         const newMessage = JSON.parse(msg.body);
         console.log('Parsed message:', newMessage);
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        const messageKey = `${newMessage.sender}:${newMessage.content}`;
+        setMessagesMap((prevMessages) => {
+          if (!prevMessages.has(messageKey)) {
+            const newMessagesMap = new Map(prevMessages);
+            newMessagesMap.set(messageKey, newMessage);
+            return newMessagesMap;
+          }
+          return prevMessages;
+        });
       });
 
       client.send('/app/chat.addUser', {}, JSON.stringify({ sender: username, type: 'JOIN' }));
@@ -51,6 +59,7 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
         content: message,
         type: 'CHAT'
       };
+      console.log("gonderilen mesaj : ", chatMessage);
       stompClient.send('/app/chat.sendMessage', {}, JSON.stringify(chatMessage));
       setMessage('');
     }
@@ -66,7 +75,7 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
           Connecting...
         </div>
         <ul id="messageArea">
-          {messages.map((msg, index) => (
+          {Array.from(messagesMap.values()).map((msg, index) => (
             <li key={index}>
               <strong>{msg.sender}: </strong>{msg.content}
             </li>
