@@ -71,15 +71,21 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
       <div id="chat-page">
       <div className="chat-container">
         <div className="chat-header">
-          <h2>General Chat Channel </h2>
+          <h2>General Chat Channel</h2>
         </div>
         <ul id="messageArea">
           {Array.from(messagesMap.values()).map((msg, index) => (
             <li key={index}>
-              {msg.sender === username ? (
-                <MessageCard type='outgoing' message={msg.content} username={username} />
+              {msg.content?.length > 0 ? (
+                <>
+                  {msg.sender === username ? (
+                    <MessageCard type='outgoing' message={msg.content} username={username} />
+                  ) : (
+                    <MessageCard type='incoming' message={msg.content} username={msg.sender} />
+                  )}
+                </>
               ) : (
-                <MessageCard type='incoming' message={msg.content} username={msg.sender} />
+                <>{msg.sender} connected to the chat !</>
               )}
             </li>
           ))}
