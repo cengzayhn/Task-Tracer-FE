@@ -5,12 +5,11 @@ import "./styles.css";
 
 interface TaskTracerProjectsCardProps {
     name: string;
-    description: string;
 }
 
 const TaskTracerProjectsCard: React.FC<TaskTracerProjectsCardProps> = (props) => {
 
-    const { name, description } = props;
+    const { name } = props;
 
     return (
         <Card className="card-container">
@@ -20,9 +19,6 @@ const TaskTracerProjectsCard: React.FC<TaskTracerProjectsCardProps> = (props) =>
                 </IconButton>
                 <Typography variant="h5">
                     {name}
-                </Typography>
-                <Typography variant="body2">
-                    {description}
                 </Typography>
             </CardContent>
         </Card>
