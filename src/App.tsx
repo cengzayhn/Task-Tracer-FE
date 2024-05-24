@@ -27,7 +27,7 @@ function App() {
             <Route path="/" element={<TaskTracerDashboardPage />} />
             <Route path="/projects" element={<TaskTracerProjectsPage />} />
             <Route path="/chat" element={<TaskTracerChatPage username={username}/>} />
-            <Route path="/calendar" element={<TaskTracerCalendarPage />} />
+            <Route path="/calendar" element={<TaskTracerCalendarPage username={username}/>} />
           </Route>
           <Route path="*" element={<TaskTracerNotFoundPage />} /> 
         </Routes>

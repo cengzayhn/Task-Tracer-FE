@@ -17,13 +17,19 @@ const dummyData = [
   { title: 'Task 7', description: 'Bu bir task açıklamasıdır 7.' },
   { title: 'Task 8', description: 'Bu bir task açıklamasıdır 8.' },
 ];
+  
+interface TaskTracerCalendarComponentProps {
+  username: string;
+}
 
-const TaskTracerCalendarComponent: React.FC = () => {
+const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = (props) => {
   const [selectedDate, setSelectedDate] = React.useState<Dayjs | null>(dayjs());
   const [openDialog, setOpenDialog] = React.useState<boolean>(false);
   const [isEditMode, setIsEditMode] = React.useState<boolean>(false);
   const [taskTitle , setTaskTitle] = React.useState<string>("");
   const [taskDescription, setTaskDescription] = React.useState<string>("");
+
+  const {username} = props;
 
   return (
     <Box border={1} width="100%" p={2} className=""  style={{ height: "80vh", border:'1px solid transparent' }}>
@@ -57,9 +63,11 @@ const TaskTracerCalendarComponent: React.FC = () => {
            setOpenDialog={setOpenDialog}
            isEditMode= {isEditMode}
            taskTitle={taskTitle}
-           taskDescription={taskDescription}
            setTaskTitle={setTaskTitle} 
+           taskDescription={taskDescription}
            setTaskDescription={setTaskDescription}
+           username={username}
+           date={selectedDate.toString()}
            />)}
         </Grid>
       </Grid>

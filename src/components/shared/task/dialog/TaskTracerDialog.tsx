@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Grid, TextField } from '@mui/material';
+import { createTask } from '../../../../service/taskService';
 import './styles.css';
 
 interface TaskTracerDialogProps {
@@ -16,12 +17,32 @@ interface TaskTracerDialogProps {
     setTaskTitle?: Function;
     taskDescription: string;
     setTaskDescription?: Function;
+    username: string;
+    date: string;
 }
 
 const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
 
-    const {openDialog, setOpenDialog, isEditMode, setTaskTitle, taskTitle, taskDescription, setTaskDescription} = props;
+    const {openDialog, setOpenDialog, isEditMode, setTaskTitle, taskTitle, taskDescription, setTaskDescription, username, date} = props;
 
+    const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTaskTitle && setTaskTitle(event.target.value);
+    };
+
+    const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTaskDescription && setTaskDescription(event.target.value);
+    };
+
+    const handleSave = () => {
+
+        if(!isEditMode){
+            console.log("yaratıcı mod")
+            createTask(taskTitle, taskDescription, username, date);
+        }else{
+            console.log("duzenleyici mod")
+        }
+        handleClose();
+    }
 
     const handleClose =() =>{
         setOpenDialog && setOpenDialog(false);
@@ -43,19 +64,23 @@ const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
                     <Grid container>
                         <Grid item xs={12}>
                             <TextField
-                                placeholder={taskTitle}
+                                label={"Title"}
+                                value={taskTitle}
+                                onChange={handleTitleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                placeholder={taskDescription}
+                                label={"Description"}
+                                value={taskDescription}
+                                onChange={handleDescriptionChange}
                             />
                         </Grid>
                     </Grid>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-            <Button variant='contained' color='success' onClick={handleClose}>Save</Button>
+            <Button variant='contained' color='success' onClick={handleSave}>Save</Button>
             <Button variant='contained' color='inherit' onClick={handleClose} autoFocus>Close</Button>
             </DialogActions>
         </Dialog>

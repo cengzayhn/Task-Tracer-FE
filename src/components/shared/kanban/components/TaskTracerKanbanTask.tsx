@@ -63,7 +63,6 @@ const TaskTracerKanbanTask: React.FC<TaskTracerKanbanTaskProps> = ({ id, title, 
           </FormControl>
         </div>
       </Card>
-      <TaskTracerDialog openDialog={openDialog} taskTitle={title} taskDescription={"description"}/>
     </React.Fragment>
   );
 };
