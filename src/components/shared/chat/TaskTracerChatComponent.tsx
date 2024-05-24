@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import MessageCard from './components/MessageCard';
 
 interface ChatPageProps {
   username: string;
@@ -78,6 +79,11 @@ const TaskTracerChatComponent: React.FC<ChatPageProps> = ({ username }) => {
           {Array.from(messagesMap.values()).map((msg, index) => (
             <li key={index}>
               <strong>{msg.sender}: </strong>{msg.content}
+              {msg.sender === username ? (
+                <MessageCard type='outgoing' message={msg.content} username={username} />
+              ) : (
+                <MessageCard type='incoming' message={msg.content} username={msg.sender} />
+              )}
             </li>
           ))}
         </ul>
