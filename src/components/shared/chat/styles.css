@@ -1,9 +1,17 @@
-#chat-page {
+ #chat-page {
     height: 37vw;
     overflow-y: scroll;
-}
+ }
+ #chat-page::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+ }
 
-.chat-header {
+ #chat-page::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 4px; 
+ }
+ .chat-header {
     width: 100%;
     height: 70px;
     background-color: #9CBFA7;
