@@ -44,11 +44,12 @@ const TaskTracerProjectsContainer: React.FC<TaskTracerProjectsContainerProps> = 
     };
 
     const handleProjectRightClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, project: IProject) => {
-        event.preventDefault();
-        setProjectId(project.id);
-        setSelectedProject(project);
-        setContextMenuPosition({ x: event.clientX, y: event.clientY });
-        console.log("id : ", project.id );
+        if(projectId.length > 1){
+            event.preventDefault();
+            setSelectedProject(project);
+            setContextMenuPosition({ x: event.clientX, y: event.clientY });
+            console.log("id : ", project.id );
+        }
     };
 
     const handleCloseContextMenu = () => {
