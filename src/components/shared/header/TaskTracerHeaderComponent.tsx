@@ -4,7 +4,11 @@ import TaskTracerButton from './components/button/TaskTracerButton';
 import TaskTracerProfile from './components/profile/TaskTracerUserProfile';
 import { Container } from '@mui/system';
 
-const TaskTracerHeaderComponent = () => {
+interface TaskTracerHeaderComponentProps {
+    projectId: string;
+}
+
+const TaskTracerHeaderComponent:React.FC<TaskTracerHeaderComponentProps> = (props) => {
 
     return(
     <>
@@ -12,7 +16,7 @@ const TaskTracerHeaderComponent = () => {
             <Container maxWidth="lg" style={{borderBottom:'2px solid green'}}>
                 <Grid container>
                     <Grid item xs={11}>
-                        <TaskTracerButton/>
+                        <TaskTracerButton {...props}/>
                     </Grid>
                     <Grid item xs={1}>
                         <TaskTracerProfile userName='Cengiz Ayhan'/>

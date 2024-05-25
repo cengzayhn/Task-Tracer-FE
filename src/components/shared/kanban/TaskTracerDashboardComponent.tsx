@@ -10,6 +10,11 @@ export enum Status{
   DONE = 'DONE',
 }
 
+interface TaskTracerDashboardComponentProps {
+  projectId: string;
+}
+
+
 const dummyData = [
   { id: 1, name: 'Ödevler yapılacak', description: 'Bu bir açıklamadır 1.', status: Status.TODO },
   { id: 2, name: 'Projeler yapılacak', description: 'Bu bir açıklamadır 2.', status: Status.IN_PROGRESS },
@@ -17,10 +22,10 @@ const dummyData = [
   { id: 4, name: ' Minus temporibus facere', description: 'Bu bir açıklamadır 4.', status: Status.DONE },
 ];
 
-const TaskTracerDashboardComponent: React.FC = () => {
- 
-  const [tasks, setTasks] = React.useState(dummyData);
+const TaskTracerDashboardComponent: React.FC<TaskTracerDashboardComponentProps> = (props) => {
 
+  const {projectId} = props;
+  const [tasks, setTasks] = React.useState(dummyData);
   const handleTaskStatusChange = (taskId: number, newStatus: Status) => {
     const updatedTasks = tasks.map(task => {
       if (task.id === taskId) {

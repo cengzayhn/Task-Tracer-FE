@@ -6,9 +6,10 @@ import TaskTracerChatComponent from "../../components/shared/chat/TaskTracerChat
 
 interface TaskTracerChatContainerProps{
     username: string;
+    projectId: string
 }
 
-const TaskTracerChatContainer:React.FC<TaskTracerChatContainerProps> = ({username}) => {
+const TaskTracerChatContainer:React.FC<TaskTracerChatContainerProps> = ({username, projectId}) => {
     const sidebarItem = [
         { content: "Members", value: [
             <div>

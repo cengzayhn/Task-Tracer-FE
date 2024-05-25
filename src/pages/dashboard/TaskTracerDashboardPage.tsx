@@ -1,10 +1,13 @@
 import TaskTracerDashboardContainer from '../../container/dashboard/TaskTracerDashboardContainer'
 import React from 'react'
 
-const TaskTracerDashboardPage=()=> {
+interface TaskTracerDashboardPageProps {
+  projectId: string;
+}
+const TaskTracerDashboardPage:React.FC<TaskTracerDashboardPageProps>=(props)=> {
   return (
     <React.Fragment>
-        <TaskTracerDashboardContainer/>
+        <TaskTracerDashboardContainer {...props}/>
     </React.Fragment>
   )
 }

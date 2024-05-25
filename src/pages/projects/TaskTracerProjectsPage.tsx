@@ -2,13 +2,19 @@ import React from "react";
 import TaskTracerProjectsContainer from "../../container/projects/TaskTracerProjectsContainer";
 import { Grid } from '@mui/material'
 
-const TaskTracerProjectsPage = () => {
+interface TaskTracerProjectsPageProps {
+    projectId: string;
+    setProjectId: Function;
+}
+
+const TaskTracerProjectsPage:React.FC<TaskTracerProjectsPageProps> = (props) => {
+    
     return(
     <React.Fragment>
         <Grid container>
             <Grid item xs={1}/>
             <Grid item xs={10}>
-                <TaskTracerProjectsContainer/>
+                <TaskTracerProjectsContainer {...props}/>
             </Grid>
             <Grid item xs={1}/>
         </Grid>

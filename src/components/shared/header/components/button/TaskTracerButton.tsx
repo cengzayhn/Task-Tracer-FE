@@ -2,13 +2,17 @@ import { Button, Grid } from '@mui/material';
 import './styles.css';
 import { Link } from 'react-router-dom';
 
-const TaskTracerButton = () => {
+interface TaskTracerHeaderButtonProps {
+    projectId: string;
+}
 
-    return(
-    <>
-        <Grid container style={{marginTop:'1.5vh'}}>
+const TaskTracerButton: React.FC<TaskTracerHeaderButtonProps> = (props) => {
+    const { projectId } = props;
+
+    return (
+        <Grid container style={{ marginTop: '1.5vh' }}>
             <Grid item xs={3}>
-                <Link to="/">
+                <Link to={`/projects/${projectId}`}>
                     <Button variant='text' color='success' className='task-tracer-button'>
                         <img src="/resources/TaskTracerExtendedLogo.png" alt="Logo" className="logo" />
                     </Button>
@@ -20,19 +24,17 @@ const TaskTracerButton = () => {
                 </Link>
             </Grid>
             <Grid item xs={3}>
-                <Link to="/chat">
+                <Link to={`/projects/${projectId}/chat`}>
                     <Button variant='text' color='success' className='task-tracer-button'>Chat</Button>
                 </Link>
-            </Grid>  
+            </Grid>
             <Grid item xs={3}>
-                <Link to="/calendar">
+                <Link to={`/projects/${projectId}/calendar`}>
                     <Button variant='text' color='success' className='task-tracer-button'>Calendar</Button>
                 </Link>
             </Grid>
-        </Grid>  
-    </>
-    )
-
+        </Grid>
+    );
 }
 
 export default TaskTracerButton;

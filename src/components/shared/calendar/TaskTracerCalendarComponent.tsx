@@ -20,6 +20,7 @@ const dummyData = [
   
 interface TaskTracerCalendarComponentProps {
   username: string;
+  projectId: string;
 }
 
 const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = (props) => {
@@ -29,7 +30,7 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
   const [taskTitle , setTaskTitle] = React.useState<string>("");
   const [taskDescription, setTaskDescription] = React.useState<string>("");
 
-  const {username} = props;
+  const {username, projectId} = props;
 
   return (
     <Box border={1} width="100%" p={2} className=""  style={{ height: "80vh", border:'1px solid transparent' }}>
