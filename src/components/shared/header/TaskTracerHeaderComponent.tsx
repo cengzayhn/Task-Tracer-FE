@@ -6,6 +6,8 @@ import { Container } from '@mui/system';
 
 interface TaskTracerHeaderComponentProps {
     projectId: string;
+    username: string;
+    setUsername: Function;
 }
 
 const TaskTracerHeaderComponent:React.FC<TaskTracerHeaderComponentProps> = (props) => {
@@ -19,7 +21,7 @@ const TaskTracerHeaderComponent:React.FC<TaskTracerHeaderComponentProps> = (prop
                         <TaskTracerButton {...props}/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TaskTracerProfile userName='Cengiz Ayhan'/>
+                        <TaskTracerProfile userName={props.username} setUsername={props.setUsername}/>
                     </Grid>
                 </Grid>
             </Container>

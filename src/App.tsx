@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {isLoggedIn && projectId.length >= 1 && <TaskTracerHeaderComponent projectId={projectId}/>}
+        {isLoggedIn && projectId.length >= 1 && <TaskTracerHeaderComponent projectId={projectId} username={username} setUsername={setUsername}/>}
         <Routes>
           <Route path="/login" element={<TaskTracerLoginPage setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} />} />
           <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>

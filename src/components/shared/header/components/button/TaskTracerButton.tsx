@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 interface TaskTracerHeaderButtonProps {
     projectId: string;
+    username: string;
+    setUsername: Function
 }
 
 const TaskTracerButton: React.FC<TaskTracerHeaderButtonProps> = (props) => {
@@ -20,17 +22,17 @@ const TaskTracerButton: React.FC<TaskTracerHeaderButtonProps> = (props) => {
             </Grid>
             <Grid item xs={3}>
                 <Link to="/projects">
-                    <Button variant='text' color='success' className='task-tracer-button'>Projects</Button>
+                    <Button variant='text' color='success' className='task-tracer-button'>PROJECTS</Button>
                 </Link>
             </Grid>
             <Grid item xs={3}>
                 <Link to={`/projects/${projectId}/chat`}>
-                    <Button variant='text' color='success' className='task-tracer-button'>Chat</Button>
+                    <Button variant='text' color='success' className='task-tracer-button'>CHAT</Button>
                 </Link>
             </Grid>
             <Grid item xs={3}>
                 <Link to={`/projects/${projectId}/calendar`}>
-                    <Button variant='text' color='success' className='task-tracer-button'>Calendar</Button>
+                    <Button variant='text' color='success' className='task-tracer-button'>TASK</Button>
                 </Link>
             </Grid>
         </Grid>
