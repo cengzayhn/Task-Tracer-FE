@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import TaskTracerProjectsCard from '../../components/shared/projects-card/TaskTracerProjectsCard';
 import { Link } from 'react-router-dom';
 import { IProject } from 'modal/Project';
+import TaskTracerDialog from '../../components/shared/task/dialog/TaskTracerDialog';
 
 const TaskTracerProjectsContainer = () => {
     
@@ -81,10 +82,22 @@ const TaskTracerProjectsContainer = () => {
             isOpen: true 
         }
     ]
+    const [openDialog, setOpenDialog] = useState(false);
+    const [projectName, setProjectName] = useState<string>("");
 
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    };
     return(
         <React.Fragment>
-            <Grid container spacing={5} style={{marginTop:'5vh'}}>
+            <Grid container className="button-container">
+                <Grid item xs={2}/>
+                <Grid item xs={8} className='taskcreate-container'>
+                    <Button className='taskcreate-button' variant='contained' color='success' onClick={handleOpenDialog}>+</Button>
+                </Grid>
+                <Grid item xs={2}/>
+            </Grid>
+            <Grid container spacing={5} style={{marginTop:'0.5vh'}}>
                 {dummyData.map((data, index) => (
                     <Grid item xs={3} key={index}>
                         <Link className='projects-link' to={`/project/${index}`}> {/* TODO: should be refactored */}
@@ -93,6 +106,15 @@ const TaskTracerProjectsContainer = () => {
                     </Grid>
                 ))}
             </Grid>
+            <TaskTracerDialog 
+                openDialog={openDialog} 
+                setOpenDialog={setOpenDialog} 
+                mode={"create project"} 
+                taskTitle={projectName} 
+                setTaskTitle={setProjectName} 
+                username="currentUsername" 
+                date="currentDate" 
+            />
         </React.Fragment>
     )
 }

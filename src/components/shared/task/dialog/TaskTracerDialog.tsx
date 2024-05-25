@@ -1,4 +1,4 @@
-import  React from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,22 +8,22 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Grid, TextField } from '@mui/material';
 import { createTask, updateTask } from '../../../../service/taskService';
 import './styles.css';
+import { createProject } from '../../../../service/projectService';
 
 interface TaskTracerDialogProps {
     openDialog: boolean;
     setOpenDialog?: Function;
-    isEditMode?: boolean
+    mode: "create task" | "update task" | "create project" | "update project";
     taskTitle: string;
     setTaskTitle?: Function;
-    taskDescription: string;
+    taskDescription?: string;
     setTaskDescription?: Function;
     username: string;
     date: string;
 }
 
 const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
-
-    const {openDialog, setOpenDialog, isEditMode, setTaskTitle, taskTitle, taskDescription, setTaskDescription, username, date} = props;
+    const { openDialog, setOpenDialog, mode, setTaskTitle, taskTitle, taskDescription = '', setTaskDescription, username, date } = props;
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTaskTitle && setTaskTitle(event.target.value);
@@ -34,60 +34,90 @@ const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
     };
 
     const handleSave = () => {
-
-        if(!isEditMode){
-            console.log("yaratıcı mod")
-            createTask(taskTitle, taskDescription, username, date);
-        }else{
-            console.log("duzenleyici mod")
-            updateTask("0636e5fa-855f-4310-9f33-d8956271a322",taskTitle, taskDescription, username, "DONE")
+        switch (mode) {
+            case 'create task':
+                createTask(taskTitle, taskDescription, username, date);
+                break;
+            case 'update task':
+                updateTask("0636e5fa-855f-4310-9f33-d8956271a322", taskTitle, taskDescription, username, "DONE");
+                break;
+            case 'create project':
+                console.log("Creating project...");
+                createProject(taskTitle);
+                break;
+            case 'update project':
+                console.log("Updating project...");
+                break;
         }
+        setTaskTitle && setTaskTitle("");
+        setTaskDescription && setTaskDescription("");
         handleClose();
-    }
+    };
 
-    const handleClose =() =>{
+    const handleClose = () => {
         setOpenDialog && setOpenDialog(false);
-    }
+    };
 
-    return(
-    <React.Fragment>
-        <Dialog
-            open={openDialog}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-        >
-            <DialogTitle id="alert-dialog-title">
-            {isEditMode ? "Update the Task" : "Create a new Task"}
-            </DialogTitle>
-            <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <TextField
-                                label={"Title"}
-                                value={taskTitle}
-                                onChange={handleTitleChange}
-                            />
+    const getDialogTitle = () => {
+        switch (mode) {
+            case 'create task':
+                return "Create a new Task";
+            case 'update task':
+                return "Update the Task";
+            case 'create project':
+                return "Create a new Project";
+            case 'update project':
+                return "Update the Project";
+            default:
+                return "";
+        }
+    };
+
+    return (
+        <React.Fragment>
+            <Dialog
+                open={openDialog}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                className={mode.includes('project') ? 'project-dialog' : ''}
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {getDialogTitle()}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label={mode.includes('project') ? "Project Title" : "Task Title"}
+                                    value={taskTitle}
+                                    onChange={handleTitleChange}
+                                    fullWidth
+                                    margin="normal"
+                                />
+                            </Grid>
+                            {!mode.includes('project') && (
+                                <Grid item xs={12}>
+                                    <TextField
+                                        label="Description"
+                                        value={taskDescription}
+                                        onChange={handleDescriptionChange}
+                                        fullWidth
+                                        margin="normal"
+                                    />
+                                </Grid>
+                            )}
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                label={"Description"}
-                                value={taskDescription}
-                                onChange={handleDescriptionChange}
-                            />
-                        </Grid>
-                    </Grid>
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-            <Button variant='contained' color='success' onClick={handleSave}>Save</Button>
-            <Button variant='contained' color='inherit' onClick={handleClose} autoFocus>Close</Button>
-            </DialogActions>
-        </Dialog>
-    </React.Fragment>
-)
-}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button variant='contained' color='success' onClick={handleSave}>Save</Button>
+                    <Button variant='contained' color='inherit' onClick={handleClose} autoFocus>Close</Button>
+                </DialogActions>
+            </Dialog>
+        </React.Fragment>
+    );
+};
 
-
-export default TaskTracerDialog;    
+export default TaskTracerDialog;

@@ -61,7 +61,7 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
           (<TaskTracerDialog
            openDialog={openDialog}
            setOpenDialog={setOpenDialog}
-           isEditMode= {isEditMode}
+           mode= {isEditMode ? "update task" : "create task"}
            taskTitle={taskTitle}
            setTaskTitle={setTaskTitle} 
            taskDescription={taskDescription}

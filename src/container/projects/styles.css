@@ -1,3 +1,23 @@
 .projects-link {
     text-decoration: none;
 }
+
+.button-container {
+    margin-top: 6vh;
+}
+
+.taskcreate-button {
+    width: 100%;
+    color: white;
+    background-color: #28a745;
+    padding: 15px;
+    font-size: 18px;
+    text-transform: none;
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s, transform 0.3s; 
+}
+
+.taskcreate-button:hover {
+    background-color: #218838;
+}

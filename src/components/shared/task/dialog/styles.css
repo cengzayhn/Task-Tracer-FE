@@ -1,10 +1,14 @@
 .MuiDialog-paper {
   border-radius: 15px !important;
+  padding: 20px; 
+  min-width: 500px;
 }
 
 .MuiDialogTitle-root {
   background-color: #255957 !important;
   color: white !important;
+  padding: 16px;
+  font-weight: bold; 
 }
 
 .MuiDialogContentText-root {
@@ -19,9 +23,26 @@
 .MuiDialogActions-root {
   display: flex;
   justify-content: space-between;
-  margin-top: 16px; /* Aralığı kontrol etmek için */
+  margin-top: 16px; 
+  padding: 8px 24px;
 }
 
 .MuiButton-root {
-  margin-left: 8px; /* Butonlar arası boşluk için */
+  margin-left: 8px; 
+  padding: 8px 16px;
+  font-size: 14px; 
+  font-weight: 500; 
+}
+
+.project-dialog .MuiDialog-paper {
+  height: auto; 
+  min-height: 200px;
+}
+
+.MuiTextField-root {
+  width: 100%; 
+}
+
+.MuiDialogContent-root {
+  overflow-y: auto;
 }
