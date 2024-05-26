@@ -81,3 +81,7 @@ body, html {
 .login-button:hover {
   background-color: #8FA998;
 }
+.error-message {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

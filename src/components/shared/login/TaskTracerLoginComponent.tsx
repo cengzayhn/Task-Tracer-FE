@@ -14,6 +14,7 @@ interface TaskTracerLoginComponentProps {
 const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props) => {
   const { setIsLoggedIn, setShowLogin, username, setUsername } = props;
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -25,6 +26,7 @@ const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props
       navigate('/');
     } catch (error) {
       console.error("Invalid username or password", error);
+      setError("Invalid username or password"); 
     }
   };
 
@@ -59,6 +61,11 @@ const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props
               onChange={(e) => setPassword(e.target.value)}
               className="input-textfield"
             />
+            {error && (
+              <Typography variant="body2" color="error" className="error-message">
+                {error}
+              </Typography>
+            )}
             <Typography className="input-text">
               Don't have an account? <span className="input-login" onClick={() => setShowLogin(false)}>Sign up</span>
             </Typography>
