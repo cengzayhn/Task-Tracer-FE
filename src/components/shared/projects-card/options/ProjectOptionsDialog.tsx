@@ -28,14 +28,12 @@ const ProjectOptionsDialog: React.FC<ProjectOptionsDialogProps> = (props) => {
                 const usernameList = members.split(/[;\s]+/).filter(Boolean);
                 try {
                     await updateProject(selectedProject.id, projectName, usernameList);
-                    window.location.reload();
                 } catch (error) {
                     console.error("Update project error: ", error);
                 }
             }else{
                 try{
                     await closeProject(selectedProject.id);
-                    window.location.reload();
                 }catch(error){
                     console.error("Close project error : ",error);
                 }
