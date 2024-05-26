@@ -27,3 +27,30 @@ export const getProjectsByUsername = async (username: string) => {
         throw error;
     }
 }
+
+export const updateProject = async (id: string, name: string, usernameList:string[]) => {
+    const requestBody = {
+        id: id,
+        name: name,
+        usernameList: usernameList
+    }
+    try{
+        const response = await axios.put(baseURL + projectURL + 'update', requestBody);
+        console.log("Updating project..", usernameList);
+        return response.data
+    }catch(error){
+        console.error("Update project errır : ", error);
+        throw error;
+    }
+}
+
+export const closeProject = async (id: string) => {
+    try{
+        const response = await axios.get(baseURL + projectURL + id + '/closed');
+        console.log("Closing project...", id);
+        return response.data;
+    }catch(error){
+        console.error("Close project error : ", error);
+        throw error;
+    }
+}
