@@ -5,6 +5,7 @@ import { Grid } from '@mui/material'
 interface TaskTracerProjectsPageProps {
     projectId: string;
     setProjectId: Function;
+    username: string;
 }
 
 const TaskTracerProjectsPage:React.FC<TaskTracerProjectsPageProps> = (props) => {

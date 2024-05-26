@@ -33,7 +33,7 @@ const ProjectOptionsDialog: React.FC<ProjectOptionsDialogProps> = (props) => {
                         <TextField 
                             label="Members" 
                             fullWidth 
-                            defaultValue={selectedProject?.memberIdList.join('; ')} 
+                            defaultValue={selectedProject?.usernameList.join('; ')} 
                             sx={{ marginBottom: 2 }}
                         />
                     </>

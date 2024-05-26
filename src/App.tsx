@@ -24,7 +24,7 @@ function App() {
           <Route path="/login" element={<TaskTracerLoginPage setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} />} />
           <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
             <Route path="/" element={isLoggedIn ? <Navigate to="/projects" /> : <Navigate to="/login" />} />
-            <Route path="/projects" element={<TaskTracerProjectsPage projectId={projectId} setProjectId={setProjectId}/>} />
+            <Route path="/projects" element={<TaskTracerProjectsPage projectId={projectId} setProjectId={setProjectId} username={username}/>} />
             <Route path="/projects/:projectId" element={<TaskTracerDashboardPage projectId={projectId}/>} />
             <Route path="/projects/:projectId/chat" element={<TaskTracerChatPage username={username} projectId={projectId}/>} />
             <Route path="/projects/:projectId/calendar" element={<TaskTracerCalendarPage username={username} projectId={projectId}/>} />

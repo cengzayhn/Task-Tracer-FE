@@ -3,5 +3,6 @@ export interface IUser{
    name: string;
    surname: string;
    username: string;
-   password: string; 
+   password: string;
+   projectIdList: string; 
 }

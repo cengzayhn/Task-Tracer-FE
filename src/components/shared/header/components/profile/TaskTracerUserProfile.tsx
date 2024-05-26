@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles.css';
-import { Avatar, Popover, Button } from '@mui/material';
+import { Avatar, Popover, Button, Typography } from '@mui/material';
 
 interface TaskTracerProfileProps {
     userName: string;
@@ -46,17 +46,13 @@ const TaskTracerUserProfile: React.FC<TaskTracerProfileProps> = ({ userName, set
                     horizontal: 'center',
                 }}
             >
-                <div style={{ padding: '8px' }}>
+                <div className="popover-content">
+                    <Typography className="username">{userName}</Typography>
                     <Button 
                         onClick={handleSignOut} 
                         color="inherit" 
                         size="small"
-                        style={{
-                            textTransform: 'none',
-                            padding: '4px 8px',
-                            fontSize: '0.75rem',
-                            minWidth: 'unset'
-                        }}
+                        className="sign-out-button"
                     >
                         Sign out
                     </Button>

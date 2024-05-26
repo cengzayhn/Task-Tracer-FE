@@ -4,6 +4,6 @@ export interface IProject {
     createdDate: string;
     closedDate: string;
     taskIdList: string[];
-    memberIdList: string[];
+    usernameList: string[];
     isOpen: boolean;
 }

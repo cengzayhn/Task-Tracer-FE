@@ -19,7 +19,7 @@ interface TaskTracerDialogProps {
     taskDescription?: string;
     setTaskDescription?: Function;
     username: string;
-    date: string;
+    date?: string;
 }
 
 const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
@@ -36,14 +36,16 @@ const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
     const handleSave = () => {
         switch (mode) {
             case 'create task':
-                createTask(taskTitle, taskDescription, username, date);
+                //createTask(taskTitle, taskDescription, username, date);
                 break;
             case 'update task':
                 updateTask("0636e5fa-855f-4310-9f33-d8956271a322", taskTitle, taskDescription, username, "DONE");
                 break;
             case 'create project':
                 console.log("Creating project...");
-                createProject(taskTitle);
+                console.log("username",username);
+                
+                createProject(taskTitle, Array.of(username));
                 break;
             case 'update project':
                 console.log("Updating project...");
