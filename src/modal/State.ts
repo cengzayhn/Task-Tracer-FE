@@ -1,6 +1,6 @@
 export enum IState {
-    'OPEN',
-    'IN_PROGRESS',
-    'IN_TEST',
-    'DONE'
+    TODO = 'TODO',
+    IN_PROGRESS = 'IN PROGRESS',
+    IN_TEST = 'IN TEST',
+    DONE = 'DONE',
 }

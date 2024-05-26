@@ -36,3 +36,13 @@ export const updateTask = async (id:string ,title:string, description:string, cr
         throw error;
     }
 }
+
+export const getTasksByProjectId = async(projectId: string) => {
+    try{
+        const response = await axios.get(baseURL+taskURL+projectId+'/by-projectId');
+        return response.data;
+    }catch(error){
+        console.log("Get tasks by projectId error : ", error);
+        throw error;
+    }
+}

@@ -2,39 +2,43 @@ import React from 'react';
 import '../styles.css';
 import { Typography } from '@mui/material';
 import TaskTracerKanbanTask from './TaskTracerKanbanTask';
-import { Status } from '../TaskTracerDashboardComponent';
-
+import { ITask } from '../../../../modal/Task';
+import { IState } from '../../../../modal/State';
 
 interface TaskTracerKanbanColumnProps {
-    status?: Status;
-    tasks?: { id: number, name: string, description: string, status: Status }[];
-    onTaskStatusChange: Function;
+  status: IState;
+  tasks: ITask[];
+  onTaskStatusChange: (taskId: string, newState: IState) => void;
 }
 
 const TaskTracerKanbanColumn: React.FC<TaskTracerKanbanColumnProps> = (props) => {
-  
-    const { status, tasks, onTaskStatusChange } = props;
+  const { status, tasks, onTaskStatusChange } = props;
 
-    return (
-      <React.Fragment>
-        <div className='column-container'>
-          <div className='column-title'>
-            <Typography variant='h4'>{status}</Typography>
-          </div>
-          <div>
-            {tasks && tasks.map((task) => (
-              <TaskTracerKanbanTask
-                key={task.id}
-                id={task.id}
-                title={task.name}
-                status={task.status}
-                setStatus={onTaskStatusChange}
-              />
-            ))}
-          </div>
+  React.useEffect(()=>{
+    console.log("status => ", status);
+    
+  }, [])
+
+  return (
+    <React.Fragment>
+      <div className='column-container'>
+        <div className='column-title'>
+          <Typography variant='h4'>{status}</Typography>
         </div>
-      </React.Fragment>
-    )
-}
+        <div>
+          {tasks.map((task) => (
+            <TaskTracerKanbanTask
+              key={task.id}
+              id={task.id}
+              title={task.title}
+              status={task.state}
+              setStatus={onTaskStatusChange}
+            />
+          ))}
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
 
 export default TaskTracerKanbanColumn;
