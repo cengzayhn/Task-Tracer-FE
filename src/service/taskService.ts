@@ -46,3 +46,18 @@ export const getTasksByProjectId = async(projectId: string) => {
         throw error;
     }
 }
+
+export const updateTaskState = async (id:string , state:string) => {
+    const requestBody = {
+        id: id,
+        state: state
+    }
+    try{
+        const response = await axios.put(baseURL+taskURL+'update', requestBody);
+        console.log(response)
+        return response.data;
+    }catch(error){
+        console.error("Task update state error :", error);
+        throw error;
+    }
+}

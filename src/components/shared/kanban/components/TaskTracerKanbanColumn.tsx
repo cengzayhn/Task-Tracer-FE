@@ -14,16 +14,11 @@ interface TaskTracerKanbanColumnProps {
 const TaskTracerKanbanColumn: React.FC<TaskTracerKanbanColumnProps> = (props) => {
   const { status, tasks, onTaskStatusChange } = props;
 
-  React.useEffect(()=>{
-    console.log("status => ", status);
-    
-  }, [])
-
   return (
     <React.Fragment>
       <div className='column-container'>
         <div className='column-title'>
-          <Typography variant='h4'>{status}</Typography>
+          <Typography variant='h4'>{status.split('_').join(' ')}</Typography>
         </div>
         <div>
           {tasks.map((task) => (

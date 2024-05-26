@@ -5,6 +5,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import './styles.css';
 import { IState } from "../../../../modal/State";
+import { updateTaskState } from "../../../../service/taskService";
 
 interface TaskTracerKanbanTaskProps {
   id: string;
@@ -17,9 +18,16 @@ const TaskTracerKanbanTask: React.FC<TaskTracerKanbanTaskProps> = ({ id, title, 
 
   const [openDialog, setOpenDialog] = React.useState<boolean>(false);
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = async(event: SelectChangeEvent) => {
     const newState = event.target.value as unknown as IState;
-    setStatus(id, newState);
+
+    try{
+      await updateTaskState(id, newState);
+      setStatus(id, newState); 
+      
+    }catch(error){
+      console.error("Error updating task state:", error);
+    }
   };
 
   const handleOnClick = () => {
