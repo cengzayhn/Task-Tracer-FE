@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import './styles.css';
+import { authenticateUser } from '../../../service/userService';
 
 interface TaskTracerLoginComponentProps {
   setIsLoggedIn: Function;
@@ -11,17 +12,19 @@ interface TaskTracerLoginComponentProps {
 }
 
 const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props) => {
-
-  const {setIsLoggedIn, setShowLogin, username, setUsername} = props;
+  const { setIsLoggedIn, setShowLogin, username, setUsername } = props;
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (true) {
+  const handleLogin = async () => {
+    try {
+      const user = await authenticateUser(username, password);
+      console.log("User authenticated:", user);
+      setIsLoggedIn(true);
       navigate('/');
-      props.setIsLoggedIn(true);
-    } else {
-      console.log("Invalid password or username");
+    } catch (error) {
+      console.error("Invalid username or password", error);
     }
   };
 
@@ -52,11 +55,12 @@ const TaskTracerLoginComponent: React.FC<TaskTracerLoginComponentProps> = (props
               variant="outlined"
               fullWidth
               margin="normal"
-              value={username}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="input-textfield"
             />
             <Typography className="input-text">
-              Don't have an account? <span className="input-login" onClick={()=> setShowLogin(false)}>Sign up</span>
+              Don't have an account? <span className="input-login" onClick={() => setShowLogin(false)}>Sign up</span>
             </Typography>
             <Button
               variant="contained"

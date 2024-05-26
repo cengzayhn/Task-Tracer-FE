@@ -18,3 +18,17 @@ export const createUser = async (name: string, surname: string, username: string
         throw error;
     }
 }
+
+export const authenticateUser = async (username: string, password: string ) => {
+    const requestBody = {
+        username: username,
+        password: password
+    }
+    try{
+        const response = await axios.post(baseURL+userURL+'authenticate',requestBody);
+        return response.data; 
+    }catch(error){
+        console.error("Authentication error :", error);
+        throw error;
+    }
+}
