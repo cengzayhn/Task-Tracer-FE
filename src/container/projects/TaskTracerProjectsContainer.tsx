@@ -110,7 +110,8 @@ const TaskTracerProjectsContainer: React.FC<TaskTracerProjectsContainerProps> = 
                 mode={"create project"} 
                 taskTitle={projectName} 
                 setTaskTitle={setProjectName} 
-                username={username} 
+                username={username}
+                projectId={projectId} 
             />
             {contextMenuPosition && (
                 <Paper

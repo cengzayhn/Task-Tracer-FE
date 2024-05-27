@@ -8,13 +8,15 @@ interface TaskCardProps {
     description: string;
     setOpenDialog: Function;
     setIsEditMode: Function;
+    setSelectedTask: Function;
 }
 
 const TaskCard: React.FC<TaskCardProps> = (props) => {
 
-    const { id, title, description, setOpenDialog, setIsEditMode } = props;
+    const { id, title, description, setOpenDialog, setIsEditMode, setSelectedTask } = props;
 
     const handleClick =()=>{
+        setSelectedTask({id:id, title:title, description:description});
         setOpenDialog(true);
         setIsEditMode(true);
     }

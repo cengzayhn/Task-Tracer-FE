@@ -17,7 +17,7 @@ const TaskTracerDashboardComponent: React.FC<TaskTracerDashboardComponentProps> 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const tasks = await getTasksByProjectId("9937f74c-7af2-4891-bd0c-f752da647cee");
+        const tasks = await getTasksByProjectId(projectId);
         setTasks(tasks);
       } catch (error) {
         console.error("Error fetching tasks:", error);
