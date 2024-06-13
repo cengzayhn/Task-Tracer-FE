@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 interface TaskTracerCalendarComponentProps {
   username: string;
   projectId: string;
+  projectName: string;
 }
 
 interface IUpdateTask {
@@ -21,7 +22,7 @@ interface IUpdateTask {
 }
 
 const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = (props) => {
-  const {username, projectId} = props;
+  const {username, projectId, projectName} = props;
 
   const[selectedTask, setSelectedTask] = React.useState<IUpdateTask>();
   const [selectedDate, setSelectedDate] = React.useState<Dayjs | null>(dayjs());
@@ -101,6 +102,7 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
         </Grid>
         <Grid item xs={7} container spacing={2}  style={{ marginTop: '5vh', height: '100%', overflowY: 'auto'}}>
           <Grid item xs={12} sm={12}  style={{ width: '100%' , marginRight:'29vh'}}>
+            <Typography variant='h4'>{projectName}</Typography>
             <Typography variant="h5" gutterBottom style={{ marginBottom: '10px' }}>{selectedDate?.format("DD / MM / YYYY")}</Typography>
             <Button variant='contained' color='success' onClick={()=>{setOpenDialog(true); setIsEditMode(false)}} style={{width:'80%'}}>+</Button>  
           </Grid>  

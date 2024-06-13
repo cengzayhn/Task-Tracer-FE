@@ -17,3 +17,14 @@
 .column-title{
     padding-top: 10px;
 }
+.project-url {
+    display: flex;
+    align-items: center;
+  }
+  
+  .project-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #255957; /* Arka plan rengiyle uyumlu bir renk seçimi */
+    margin-right: 20px; /* İstediğiniz boşluk miktarı */
+  }

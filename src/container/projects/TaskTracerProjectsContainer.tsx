@@ -11,17 +11,18 @@ import { getProjectsByUsername } from '../../service/projectService';
 interface TaskTracerProjectsContainerProps {
     projectId: string;
     setProjectId: Function;
+    projectName:string;
+    setProjectName:Function;
     username: string;
 }
 
 const TaskTracerProjectsContainer: React.FC<TaskTracerProjectsContainerProps> = (props) => {
-    const { projectId, setProjectId, username} = props;
+    const { projectId, setProjectId, username, projectName, setProjectName} = props;
     const navigate = useNavigate(); 
     const [projects, setProjects] = useState<IProject[]>();
     const [openDialog, setOpenDialog] = useState(false);
     const [openOptionsDialog, setOpenOptionsDialog] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
-    const [projectName, setProjectName] = useState<string>("");
     const [selectedProject, setSelectedProject] = useState<IProject | undefined>(undefined);
     const [contextMenuPosition, setContextMenuPosition] = useState<{ x: number; y: number } | null>(null);
     const [refresh, setRefresh] = React.useState<boolean>(false);
@@ -33,6 +34,7 @@ const TaskTracerProjectsContainer: React.FC<TaskTracerProjectsContainerProps> = 
     const handleProjectClick = (data: IProject) => {
         setProjectId(data.id);
         setSelectedProject(data);
+        setProjectName(data.name);
         navigate(`/projects/${data.id}`);
     };
 

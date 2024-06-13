@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 interface TaskTracerDashboardContainerProps {
   projectId: string;
+  projectName: string;
 }
 
 const TaskTracerDashboardContainer:React.FC<TaskTracerDashboardContainerProps> = (props) => {

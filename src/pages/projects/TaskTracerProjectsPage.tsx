@@ -5,6 +5,8 @@ import { Grid } from '@mui/material'
 interface TaskTracerProjectsPageProps {
     projectId: string;
     setProjectId: Function;
+    projectName:string;
+    setProjectName:Function;
     username: string;
 }
 

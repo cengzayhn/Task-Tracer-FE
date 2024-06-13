@@ -3,6 +3,7 @@ import React from 'react'
 
 interface TaskTracerDashboardPageProps {
   projectId: string;
+  projectName: string;
 }
 const TaskTracerDashboardPage:React.FC<TaskTracerDashboardPageProps>=(props)=> {
   return (
