@@ -22,10 +22,11 @@ interface TaskTracerDialogProps {
     date?: string;
     projectId: string;
     selectedTask?:{id:string, title:string, description:string};
+    setRefresh: Function;
 }
 
 const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
-    const { openDialog, setOpenDialog, mode, setTaskTitle, taskTitle, taskDescription = '', setTaskDescription, username, date, projectId, selectedTask} = props;
+    const { openDialog, setOpenDialog, mode, setTaskTitle, taskTitle, taskDescription = '', setTaskDescription, username, date, projectId, selectedTask,setRefresh} = props;
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTaskTitle && setTaskTitle(event.target.value);
@@ -40,12 +41,14 @@ const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
             case 'create task':
                 if(date){
                     createTask(projectId,taskTitle, taskDescription, username, date);
+                    setRefresh(true);
                 }
                 break;
             case 'update task':
                 if(selectedTask){
                     console.log("updateleniyorrr...", selectedTask);
                     updateTask(selectedTask.id, taskTitle, taskDescription);
+                    setRefresh(true);
                 }
                 break;
             case 'create project':
@@ -53,6 +56,7 @@ const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
                 console.log("username",username);
                 
                 createProject(taskTitle, Array.of(username));
+                setRefresh(true);
                 break;
             case 'update project':
                 console.log("Updating project...");

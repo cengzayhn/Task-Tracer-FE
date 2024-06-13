@@ -24,6 +24,7 @@ const TaskTracerProjectsContainer: React.FC<TaskTracerProjectsContainerProps> = 
     const [projectName, setProjectName] = useState<string>("");
     const [selectedProject, setSelectedProject] = useState<IProject | undefined>(undefined);
     const [contextMenuPosition, setContextMenuPosition] = useState<{ x: number; y: number } | null>(null);
+    const [refresh, setRefresh] = React.useState<boolean>(false);
 
     const handleOpenDialog = () => {
         setOpenDialog(true);
@@ -59,6 +60,21 @@ const TaskTracerProjectsContainer: React.FC<TaskTracerProjectsContainerProps> = 
         };
         fetchProjects();
     }, []);
+
+    React.useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                if(refresh){
+                    const projects = await getProjectsByUsername(username);
+                    setProjects(projects);
+                    setRefresh(false);
+                }
+            } catch (error) {
+                console.error("Error fetching projects:", error);
+            }
+        };
+        fetchProjects();
+    }, [refresh]);
 
     React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -111,7 +127,8 @@ const TaskTracerProjectsContainer: React.FC<TaskTracerProjectsContainerProps> = 
                 taskTitle={projectName} 
                 setTaskTitle={setProjectName} 
                 username={username}
-                projectId={projectId} 
+                projectId={projectId}
+                setRefresh={setRefresh} 
             />
             {contextMenuPosition && (
                 <Paper
@@ -136,7 +153,8 @@ const TaskTracerProjectsContainer: React.FC<TaskTracerProjectsContainerProps> = 
                 open={openOptionsDialog} 
                 isEdit={isEditMode} 
                 selectedProject={selectedProject}
-                handleClose={() => setOpenOptionsDialog(false)} 
+                handleClose={() => setOpenOptionsDialog(false)}
+                setRefresh={setRefresh} 
             />
         </React.Fragment>
     );

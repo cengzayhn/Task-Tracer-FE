@@ -8,17 +8,6 @@ import './styles.css';
 import TaskTracerDialog from '../task/dialog/TaskTracerDialog';
 import { getTasksByProjectAndDate } from '../../../service/taskService';
 import { ITask } from 'modal/Task';
-
-const dummyData = [
-  { id:'',title: 'Task 1', description: 'Bu bir task açıklamasıdır 1.' },
-  { id:'',title: 'Task 2', description: 'Bu bir task açıklamasıdır 2.' },
-  { id:'',title: 'Task 3', description: 'Bu bir task açıklamasıdır 3.' },
-  { id:'',title: 'Task 4', description: 'Bu bir task açıklamasıdır 4.' },
-  { id:'',title: 'Task 5', description: 'Bu bir task açıklamasıdır 5.' },
-  { id:'',title: 'Task 6', description: 'Bu bir task açıklamasıdır 6.' },
-  { id:'',title: 'Task 7', description: 'Bu bir task açıklamasıdır 7.' },
-  { id:'',title: 'Task 8', description: 'Bu bir task açıklamasıdır 8.' },
-];
   
 interface TaskTracerCalendarComponentProps {
   username: string;
@@ -41,7 +30,7 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
   const [taskTitle , setTaskTitle] = React.useState<string>("");
   const [taskDescription, setTaskDescription] = React.useState<string>("");
   const [tasks, setTasks] = React.useState<ITask[]>();
-
+  const [refresh, setRefresh] = React.useState<boolean>(false);
 
   const convertToISOFormat = (dateString: string): string => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -60,7 +49,6 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
         if(selectedDate){
           const tasks = await getTasksByProjectAndDate(projectId, convertToISOFormat(selectedDate.toString()));
           setTasks(tasks);
-          console.log("oluyor mu.. : ", projectId);
         }
       } catch (error) {
         console.error("Error fetching filtered tasks:", error);
@@ -68,6 +56,21 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
     };
     fetchData();
   },[selectedDate])
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (selectedDate && refresh) {
+          const tasks = await getTasksByProjectAndDate(projectId, convertToISOFormat(selectedDate.toString()));
+          setTasks(tasks);
+          setRefresh(false);
+        }
+      } catch (error) {
+        console.error("Error fetching filtered tasks:", error);
+      }
+    };
+    fetchData();
+  }, [refresh, selectedDate]);
 
   return (
     <Box border={1} width="100%" p={2} className=""  style={{ height: "80vh", border:'1px solid transparent' }}>
@@ -108,6 +111,7 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
            date={convertToISOFormat(selectedDate.toString())}
            projectId={projectId}
            selectedTask={selectedTask}
+           setRefresh={setRefresh}
            />)}
         </Grid>
       </Grid>

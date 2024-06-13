@@ -8,10 +8,11 @@ interface ProjectOptionsDialogProps {
     isEdit: boolean;
     selectedProject?: IProject;
     handleClose: () => void;
+    setRefresh: Function;
 }
 
 const ProjectOptionsDialog: React.FC<ProjectOptionsDialogProps> = (props) => {
-    const { open,selectedProject, isEdit, handleClose } = props;
+    const { open,selectedProject, isEdit, handleClose, setRefresh} = props;
     const [projectName, setProjectName] = useState<string>(selectedProject?.name || '');
     const [members, setMembers] = useState<string>(selectedProject?.usernameList.join('; ') || '');
 
@@ -28,12 +29,14 @@ const ProjectOptionsDialog: React.FC<ProjectOptionsDialogProps> = (props) => {
                 const usernameList = members.split(/[;\s]+/).filter(Boolean);
                 try {
                     await updateProject(selectedProject.id, projectName, usernameList);
+                    setRefresh(true)
                 } catch (error) {
                     console.error("Update project error: ", error);
                 }
             }else{
                 try{
                     await closeProject(selectedProject.id);
+                    setRefresh(true)
                 }catch(error){
                     console.error("Close project error : ",error);
                 }
