@@ -120,8 +120,9 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
                <Grid item xs={2} className="closeIconContainer">
                   <IconButton>
                     <DeleteIcon
+                      fontSize='medium'
                       color='error'
-                      onClick={() => { console.log("ssdfs : ", handleDelete(data.id)); }}
+                      onClick={() => handleDelete(data.id) }
                     />
                   </IconButton>
                 </Grid>
