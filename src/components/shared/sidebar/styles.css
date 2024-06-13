@@ -3,10 +3,22 @@
     color: #C8D5D5;
     background-color: #255957;
     height: 97%;
+    overflow-y: scroll;
+}
+.sidebarContent::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.sidebarContent::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Make the scrollbar thumb transparent */
+}
+
+.sidebarContent::-webkit-scrollbar-track {
+    background-color: transparent; /* Make the scrollbar track transparent */
 }
 .sidebarTitle{
     color: #C8D5D5;
-    margin-bottom: "30px",
+    margin-bottom: 30px,
 }
 .sidebar-menu{
 }

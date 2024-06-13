@@ -32,3 +32,13 @@ export const authenticateUser = async (username: string, password: string ) => {
         throw error;
     }
 }
+
+export const getAllMembers = async () => {
+    try{
+        const response = await axios.get(baseURL+userURL+'all');
+        return response.data;
+    }catch(error){
+        console.error("Fetch all members error : ", error);
+        throw error;
+    }
+}
