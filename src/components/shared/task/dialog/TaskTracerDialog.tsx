@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -21,49 +21,70 @@ interface TaskTracerDialogProps {
     username: string;
     date?: string;
     projectId: string;
-    selectedTask?:{id:string, title:string, description:string};
+    selectedTask?: { id: string; title: string; description: string };
     setRefresh: Function;
 }
 
 const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
-    const { openDialog, setOpenDialog, mode, setTaskTitle, taskTitle, taskDescription = '', setTaskDescription, username, date, projectId, selectedTask,setRefresh} = props;
+    const {
+        openDialog,
+        setOpenDialog,
+        mode,
+        setTaskTitle,
+        taskTitle,
+        taskDescription = '',
+        setTaskDescription,
+        username,
+        date,
+        projectId,
+        selectedTask,
+        setRefresh
+    } = props;
+
+    const [localTaskTitle, setLocalTaskTitle] = useState(taskTitle);
+    const [localTaskDescription, setLocalTaskDescription] = useState(taskDescription);
+
+    useEffect(() => {
+        if (mode === 'update task' && selectedTask) {
+            setLocalTaskTitle(selectedTask.title);
+            setLocalTaskDescription(selectedTask.description);
+        }
+    }, [mode, selectedTask]);
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLocalTaskTitle(event.target.value);
         setTaskTitle && setTaskTitle(event.target.value);
     };
 
     const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLocalTaskDescription(event.target.value);
         setTaskDescription && setTaskDescription(event.target.value);
     };
 
     const handleSave = () => {
         switch (mode) {
             case 'create task':
-                if(date){
-                    createTask(projectId,taskTitle, taskDescription, username, date);
+                if (date) {
+                    createTask(projectId, localTaskTitle, localTaskDescription, username, date);
                     setRefresh(true);
                 }
                 break;
             case 'update task':
-                if(selectedTask){
-                    console.log("updateleniyorrr...", selectedTask);
-                    updateTask(selectedTask.id, taskTitle, taskDescription);
+                if (selectedTask) {
+                    updateTask(selectedTask.id, localTaskTitle, localTaskDescription);
                     setRefresh(true);
                 }
                 break;
             case 'create project':
-                console.log("Creating project...");
-                console.log("username",username);
-                
-                createProject(taskTitle, Array.of(username));
+                createProject(localTaskTitle, [username]);
                 setRefresh(true);
                 break;
             case 'update project':
-                console.log("Updating project...");
+                // Update project logic here
                 break;
         }
-        setTaskTitle && setTaskTitle("");
-        setTaskDescription && setTaskDescription("");
+        setTaskTitle && setTaskTitle('');
+        setTaskDescription && setTaskDescription('');
         handleClose();
     };
 
@@ -104,7 +125,7 @@ const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
                             <Grid item xs={12}>
                                 <TextField
                                     label={mode.includes('project') ? "Project Title" : "Task Title"}
-                                    value={taskTitle}
+                                    value={localTaskTitle}
                                     onChange={handleTitleChange}
                                     fullWidth
                                     margin="normal"
@@ -114,7 +135,7 @@ const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
                                 <Grid item xs={12}>
                                     <TextField
                                         label="Description"
-                                        value={taskDescription}
+                                        value={localTaskDescription}
                                         onChange={handleDescriptionChange}
                                         fullWidth
                                         margin="normal"
