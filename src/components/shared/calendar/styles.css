@@ -1,4 +1,9 @@
 .Mui-selected {
     background-color: green !important;
   }
-  
+.closeIconContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: -22% !important;
+  align-items: center;
+}

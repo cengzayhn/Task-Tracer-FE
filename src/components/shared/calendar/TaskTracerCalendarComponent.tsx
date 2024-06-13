@@ -1,6 +1,6 @@
 import * as React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import { Grid, Box, Button, Typography } from '@mui/material';
+import { Grid, Box, Button, Typography, IconButton } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import TaskCard from '../task/TaskCard';
@@ -8,7 +8,7 @@ import './styles.css';
 import TaskTracerDialog from '../task/dialog/TaskTracerDialog';
 import { getTasksByProjectAndDate } from '../../../service/taskService';
 import { ITask } from 'modal/Task';
-  
+import DeleteIcon from '@mui/icons-material/Delete';
 interface TaskTracerCalendarComponentProps {
   username: string;
   projectId: string;
@@ -94,9 +94,28 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
             <Button variant='contained' color='success' onClick={()=>{setOpenDialog(true); setIsEditMode(false)}} style={{width:'80%'}}>+</Button>  
           </Grid>  
           {tasks && tasks.map((data, index) => (
-            <Grid item xs={12} sm={12} key={index} style={{ width: '100%' , marginLeft:'10vh'}}>
-              <TaskCard id={data.id} title={data.title} description={data.description} setOpenDialog={setOpenDialog} setIsEditMode={setIsEditMode} setSelectedTask={setSelectedTask}/>
-            </Grid>
+             <Grid item xs={12} sm={12} key={index} style={{ width: '100%', marginLeft: '10vh' }}>
+             <Grid container>
+               <Grid item xs={10}>
+                 <TaskCard
+                   id={data.id}
+                   title={data.title}
+                   description={data.description}
+                   setOpenDialog={setOpenDialog}
+                   setIsEditMode={setIsEditMode}
+                   setSelectedTask={setSelectedTask}
+                 />
+               </Grid>
+               <Grid item xs={2} className="closeIconContainer">
+                  <IconButton>
+                    <DeleteIcon
+                      color='error'
+                      onClick={() => { console.log("ssdfs : ", data.title); }}
+                    />
+                  </IconButton>
+                </Grid>
+             </Grid>
+           </Grid>
           ))}
           {selectedDate && 
           (<TaskTracerDialog

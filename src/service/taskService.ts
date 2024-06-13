@@ -72,3 +72,13 @@ export const getTasksByProjectAndDate = async (projectId: string, createdDate: s
         throw error;
     }
 }
+
+export const deleteTask = async (taskId: string) => {
+    try{
+        const response = await axios.delete(baseURL+taskURL+'delete/'+taskId);
+        return response.data;
+    }catch(error){
+        console.error("Deleting task error", error);
+        throw error;
+    }
+}
