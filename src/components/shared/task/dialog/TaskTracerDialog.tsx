@@ -48,6 +48,9 @@ const TaskTracerDialog: React.FC<TaskTracerDialogProps> = (props) => {
         if (mode === 'update task' && selectedTask) {
             setLocalTaskTitle(selectedTask.title);
             setLocalTaskDescription(selectedTask.description);
+        } else if(mode === 'create task' || mode === 'create project'){
+            setLocalTaskTitle("");
+            setLocalTaskDescription("");
         }
     }, [mode, selectedTask]);
 
