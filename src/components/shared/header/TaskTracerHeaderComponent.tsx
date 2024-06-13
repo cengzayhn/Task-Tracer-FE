@@ -15,7 +15,7 @@ const TaskTracerHeaderComponent:React.FC<TaskTracerHeaderComponentProps> = (prop
     return(
     <>
         <div>
-            <Container maxWidth="lg" style={{borderBottom:'2px solid green'}}>
+            <Container maxWidth="lg" style={{borderBottom:'2px solid #8FA998'}}>
                 <Grid container>
                     <Grid item xs={11}>
                         <TaskTracerButton {...props}/>

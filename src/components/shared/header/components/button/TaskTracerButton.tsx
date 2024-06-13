@@ -15,24 +15,24 @@ const TaskTracerButton: React.FC<TaskTracerHeaderButtonProps> = (props) => {
         <Grid container style={{ marginTop: '1.5vh' }}>
             <Grid item xs={3}>
                 <Link to={`/projects/${projectId}`}>
-                    <Button variant='text' color='success' className='task-tracer-button'>
+                    <Button variant='text' className='task-tracer-button'>
                         <img src="/resources/TaskTracerExtendedLogo.png" alt="Logo" className="logo" />
                     </Button>
                 </Link>
             </Grid>
             <Grid item xs={3}>
                 <Link to="/projects">
-                    <Button variant='text' color='success' className='task-tracer-button'>PROJECTS</Button>
+                    <Button variant='text' className='task-tracer-button'>PROJECTS</Button>
                 </Link>
             </Grid>
             <Grid item xs={3}>
                 <Link to={`/projects/${projectId}/chat`}>
-                    <Button variant='text' color='success' className='task-tracer-button'>CHAT</Button>
+                    <Button variant='text' className='task-tracer-button'>CHAT</Button>
                 </Link>
             </Grid>
             <Grid item xs={3}>
                 <Link to={`/projects/${projectId}/calendar`}>
-                    <Button variant='text' color='success' className='task-tracer-button'>TASK</Button>
+                    <Button variant='text' className='task-tracer-button'>TASK</Button>
                 </Link>
             </Grid>
         </Grid>

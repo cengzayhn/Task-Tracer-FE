@@ -20,7 +20,7 @@ const TaskTracerKanbanColumn: React.FC<TaskTracerKanbanColumnProps> = (props) =>
         <div className='column-title'>
           <Typography variant='h4'>{status.split('_').join(' ')}</Typography>
         </div>
-        <div>
+        <div style={{paddingBottom:'3%'}}>
           {tasks.map((task) => (
             <TaskTracerKanbanTask
               key={task.id}

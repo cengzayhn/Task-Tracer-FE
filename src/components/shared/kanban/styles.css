@@ -4,6 +4,7 @@
     height: auto;
     min-height: 400px;
     color: white;
+    border-radius: 10px;
 }
 
 .column-content {
@@ -12,4 +13,7 @@
 
 .kanban-container{
     margin-top: 20px;
+}
+.column-title{
+    padding-top: 10px;
 }
