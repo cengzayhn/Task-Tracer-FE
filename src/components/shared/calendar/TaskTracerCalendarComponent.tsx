@@ -6,7 +6,7 @@ import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import TaskCard from '../task/TaskCard';
 import './styles.css';
 import TaskTracerDialog from '../task/dialog/TaskTracerDialog';
-import { getTasksByProjectAndDate } from '../../../service/taskService';
+import { deleteTask, getTasksByProjectAndDate } from '../../../service/taskService';
 import { ITask } from 'modal/Task';
 import DeleteIcon from '@mui/icons-material/Delete';
 interface TaskTracerCalendarComponentProps {
@@ -72,6 +72,17 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
     fetchData();
   }, [refresh, selectedDate]);
 
+
+  const handleDelete = async (taskId:string)=> {
+    try{
+      const task = await deleteTask(taskId);
+      setRefresh(true);
+    }catch(error){
+      setRefresh(false);
+      console.error("Error while deleting task", error);
+    }
+  }
+
   return (
     <Box border={1} width="100%" p={2} className=""  style={{ height: "80vh", border:'1px solid transparent' }}>
       <Grid container justifyContent="center" alignItems="center" spacing={2} style={{ height: "100%" }}>
@@ -110,7 +121,7 @@ const TaskTracerCalendarComponent: React.FC<TaskTracerCalendarComponentProps> = 
                   <IconButton>
                     <DeleteIcon
                       color='error'
-                      onClick={() => { console.log("ssdfs : ", data.title); }}
+                      onClick={() => { console.log("ssdfs : ", handleDelete(data.id)); }}
                     />
                   </IconButton>
                 </Grid>
