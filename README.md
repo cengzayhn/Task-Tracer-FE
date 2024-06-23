@@ -1,4 +1,5 @@
 # TaskTracer
+![logo](https://github.com/cengzayhn/Task-Tracer-FE/assets/91218369/a48b0b44-eb13-4b1e-beba-e0889919822c)
 
 TaskTracer is a web application designed to help users plan and manage their daily tasks and duties more effectively. 
 The project focuses on enhancing users' work productivity, prioritizing tasks, and better organizing their daily lives.
@@ -14,22 +15,22 @@ The project focuses on enhancing users' work productivity, prioritizing tasks, a
 
 Here are some screenshots of TaskTracer in action:
 
-### Dashboard
+### Signup
 ![Dashboard](https://github.com/cengzayhn/Task-Tracer-FE/assets/91218369/c02f0cc1-3012-4eb6-9b65-811b629ae7a5)
 
-### Task List
+### Login
 ![Task List](https://github.com/cengzayhn/Task-Tracer-FE/assets/91218369/1fdcfb25-bcbc-41bc-85d0-61c9fbaa8dee)
 
-### Create Task
+### Update Task
 ![Create Task](https://github.com/cengzayhn/Task-Tracer-FE/assets/91218369/68af0896-8827-4b39-a489-30dfb2f59b23)
 
-### Task Details
+### Task Management Page
 ![Task Details](https://github.com/cengzayhn/Task-Tracer-FE/assets/91218369/fd80515e-560e-4de6-bcb0-32257013e189)
 
-### Calendar View
+### Chat Page
 ![Calendar View](https://github.com/cengzayhn/Task-Tracer-FE/assets/91218369/ea3884be-1917-4941-8e8e-f8223003fb65)
 
-### Productivity Insights
+### Kanban as Dashboard Page
 ![Productivity Insights](https://github.com/cengzayhn/Task-Tracer-FE/assets/91218369/cfe01f73-a5fb-4e57-afff-6cfccc1485a2)
 
 ## Installation
@@ -63,3 +64,6 @@ We welcome contributions to TaskTracer! If you have suggestions for new features
 For any questions or feedback, please contact:
 - **Email:** mcengzayhn@gmail.com
 - **GitHub:** [https://github.com/cengzayhn](https://github.com/cengzayhn)
+
+  ![logowithyazıpng](https://github.com/cengzayhn/Task-Tracer-FE/assets/91218369/1641ae1e-ff9c-4c20-b14a-c1bb828a39e0)
+
